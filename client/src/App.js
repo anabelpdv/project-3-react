@@ -27,7 +27,6 @@ class App extends React.Component{
     this.requestUserToDB(); 
   }
 
-
   getAllLocations=()=>{
     axios.get("http://localhost:5000/api/locations")
             .then(response=>{

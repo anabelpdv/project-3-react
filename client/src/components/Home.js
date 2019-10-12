@@ -75,7 +75,6 @@ export default class Home extends React.Component {
     fileUploadHandler = (e) =>{ 
         let copy = [...this.state.imageUrl]
         copy.push(e.target.files[0])
-    
         this.setState({imageUrl: copy})
         
     }

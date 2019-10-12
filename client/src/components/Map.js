@@ -10,7 +10,7 @@ export default class Map extends Component {
   constructor(props){
     super(props)
     this.state = {
-      map:'',
+      //map:'',
       markers: [],
       notifications: 'Anabelita'
     }
@@ -42,11 +42,7 @@ export default class Map extends Component {
   }
 
 
-  hello=()=>{
-    console.log('Hello')
-  }
-
-    InfoWindowContent =(location)=>{
+  InfoWindowContent =(location)=>{
       return(
         <div className="container-infoWindow">
           <h6>{location.title}</h6>
@@ -90,11 +86,8 @@ export default class Map extends Component {
     }
   }
 
-  initMap = () =>  {
+  initMap = () => {
 
-
-    //var myLatlng = {lat:25.7617,lng:-80.1918}
-  
       let map = new window.google.maps.Map(document.getElementById('map'),{styles: mapStyle,disableDoubleClickZoom: true });
 
       navigator.geolocation.getCurrentPosition(function(position) {
