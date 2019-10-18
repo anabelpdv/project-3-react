@@ -10,6 +10,7 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Signup from "./components/user-pages/Signup";
 
 import Home from "./components/Home";
+import Login from "./components/user-pages/Login";
 
 
 class App extends React.Component{
@@ -38,10 +39,11 @@ class App extends React.Component{
   render(){
     return (
       <div>
-              <header>
+          <header>
           <nav>
             <NavLink to="/" > Home </NavLink>
             <NavLink to="/signup-page"> Signup </NavLink>
+            <NavLink to="/login"> Login </NavLink>
             
           </nav>
         </header>
@@ -53,6 +55,7 @@ class App extends React.Component{
                   onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }   
                 /> 
             }/>
+            <Route exact path="/login" component={ Login }   /> 
         </Switch>
       </div>
     );

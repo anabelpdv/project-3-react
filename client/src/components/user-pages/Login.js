@@ -13,12 +13,12 @@ export default class Login extends React.Component {
       }
     }
 
-    genericSync(e){
+    genericSync = (e) => {
       const {  name, value } = e.target;
       this.setState({ [name]: value });
     }
 
-    handleSubmit(e){
+    handleSubmit = (e) => {
       e.preventDefault();
       axios.post('http://localhost:5000/api/login', this.state, { withCredential : true })
             .then(response=>{
@@ -27,6 +27,7 @@ export default class Login extends React.Component {
               alert('You are logged in')
             })
             .catch(err=>{
+              console.log(err)
               if(err.response.data){
                 return this.setState({ messsage: err.response.data.message })
               }
