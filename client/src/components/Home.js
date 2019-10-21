@@ -1,4 +1,6 @@
 import React from "react";
+import AddLocation from "./location-components/AddLocation";
+import Map from "./map-components/Map";
 
 
 
@@ -21,6 +23,8 @@ export default class Home extends React.Component {
             <section>
                 <h1> Home Page </h1>
                 <p> Welcome to the best app ever! ❤️ </p>
+                <AddLocation></AddLocation>
+                <Map></Map>
             </section>
         )
     }

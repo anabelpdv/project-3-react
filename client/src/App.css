@@ -23,3 +23,12 @@
 #map {
   height: 100vh;
 }
+
+.add-location-form{
+  background-color:rgb(255,255,255,0.5);
+  width:140px;
+  position:absolute;
+  z-index:1000;
+  top:250px;
+  padding:20px;
+}

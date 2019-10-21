@@ -14,9 +14,20 @@ export default class Map extends Component {
   componentDidMount(){
     this.renderMap();
   }
+
+
+  loadScript = (url)=>{
+    let index = window.document.getElementsByTagName('script')[0];
+    let script = window.document.createElement('script');
+    script.src = url;
+    script.async = true;
+    script.defer = true;
+    index.parentNode.insertBefore(script,index);
+  }
+
 /*****************************************/
   renderMap=()=>{
-    this.props.loadScript(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}&callback=initMap`);
+    this.loadScript(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}&callback=initMap`);
     window.initMap = this.initMap;
   }
 /*****************************************/

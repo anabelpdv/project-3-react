@@ -35,15 +35,7 @@ class App extends React.Component{
   }
 
 
-  loadScript = (url)=>{
-    let index = window.document.getElementsByTagName('script')[0];
-    let script = window.document.createElement('script');
-    script.src = url;
-    script.async = true;
-    script.defer = true;
-    index.parentNode.insertBefore(script,index);
-  }
-
+ 
   syncCurrentUSer(user){
     this.setState({ currentUser: user })
   }
@@ -62,7 +54,7 @@ class App extends React.Component{
         </header>
         <Switch>
             <Route exact path="/" component={ Home }   /> 
-            <Route exact path="/map" render={ ()=><Map loadScript={this.loadScript}/> }  /> 
+            <Route exact path="/map" render={ ()=><Map /> }  /> 
             <Route exact path="/signup-page" render = { () => 
                 <Signup 
                   currentUser = { this.state.currentUser }   
