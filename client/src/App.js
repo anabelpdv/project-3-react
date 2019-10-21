@@ -11,6 +11,8 @@ import Signup from "./components/user-pages/Signup";
 
 import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
+import Logout from "./components/user-pages/Logout";
+import Map from "./components/map-components/Map";
 
 
 class App extends React.Component{
@@ -32,6 +34,16 @@ class App extends React.Component{
         })
   }
 
+
+  loadScript = (url)=>{
+    let index = window.document.getElementsByTagName('script')[0];
+    let script = window.document.createElement('script');
+    script.src = url;
+    script.async = true;
+    script.defer = true;
+    index.parentNode.insertBefore(script,index);
+  }
+
   syncCurrentUSer(user){
     this.setState({ currentUser: user })
   }
@@ -41,21 +53,28 @@ class App extends React.Component{
       <div>
           <header>
           <nav>
-            <NavLink to="/" > Home </NavLink>
+            <NavLink to="/"> Home </NavLink>
+            <NavLink to="/map"> Map </NavLink>
             <NavLink to="/signup-page"> Signup </NavLink>
             <NavLink to="/login"> Login </NavLink>
-            
+            <NavLink to="/logout"> Logout </NavLink> 
           </nav>
         </header>
         <Switch>
             <Route exact path="/" component={ Home }   /> 
+            <Route exact path="/map" render={ ()=><Map loadScript={this.loadScript}/> }  /> 
             <Route exact path="/signup-page" render = { () => 
                 <Signup 
                   currentUser = { this.state.currentUser }   
                   onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }   
                 /> 
             }/>
-            <Route exact path="/login" component={ Login }   /> 
+            <Route exact path="/login" render={ ()=> <Login onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  /> }   /> 
+            <Route exact path="/logout" render={ () => 
+                <Logout 
+                currentUser = { this.state.currentUser }
+                onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }
+                /> }/> 
         </Switch>
       </div>
     );

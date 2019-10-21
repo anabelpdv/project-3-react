@@ -28,9 +28,9 @@ export default class Login extends React.Component {
             })
             .catch(err=>{
               console.log(err)
-              if(err.response.data){
-                return this.setState({ messsage: err.response.data.message })
-              }
+              // if(err.response.data){
+              //   return this.setState({ messsage: err.response.data.message })
+              // }
             });
     }
 
