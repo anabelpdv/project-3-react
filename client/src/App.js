@@ -1,14 +1,8 @@
 import React from 'react';
-
 import './App.css';
-
 import axios from "axios";
-
 import { Switch, Route, NavLink } from "react-router-dom";
-
-
 import Signup from "./components/user-pages/Signup";
-
 import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
 import Logout from "./components/user-pages/Logout";
@@ -19,11 +13,20 @@ class App extends React.Component{
   constructor(){
     super();
     this.state = {
-      currentUser: null
+      currentUser: null,
+      allLocations:[],
+      visibleLocations:[],
+      ready: false,
     }
   }
 
   componentDidMount(){
+    this.requestUserToDB();
+    this.getAllLocations();
+  }
+
+
+  requestUserToDB(){
     axios.get("http://localhost:5000/api/checkuser", { withCredentials: true })
         .then(response => {
           const { userDoc } = response.data;
@@ -34,8 +37,21 @@ class App extends React.Component{
         })
   }
 
+  getAllLocations(){
+    axios.get("http://localhost:5000/api/locations")
+          .then(response=>{
+            console.log(response.data)
+            this.setState({
+              allLocations: response.data,
+              visibleLocations: response.data,
+              ready:true,
+            })
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+  }
 
- 
   syncCurrentUSer(user){
     this.setState({ currentUser: user })
   }
@@ -46,15 +62,13 @@ class App extends React.Component{
           <header>
           <nav>
             <NavLink to="/"> Home </NavLink>
-            <NavLink to="/map"> Map </NavLink>
             <NavLink to="/signup-page"> Signup </NavLink>
             <NavLink to="/login"> Login </NavLink>
             <NavLink to="/logout"> Logout </NavLink> 
           </nav>
         </header>
         <Switch>
-            <Route exact path="/" component={ Home }   /> 
-            <Route exact path="/map" render={ ()=><Map /> }  /> 
+            <Route exact path="/" render={ ()=><Home ready={this.state.ready} allLocations={this.state.visibleLocations}/> }   /> 
             <Route exact path="/signup-page" render = { () => 
                 <Signup 
                   currentUser = { this.state.currentUser }   

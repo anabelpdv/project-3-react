@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { nextTick } from 'q';
 
 export default class AddLocation extends React.Component {
 
@@ -39,7 +38,6 @@ export default class AddLocation extends React.Component {
           .catch(err=>{
             console.log(err)
           })
-
   }
 
   render() {

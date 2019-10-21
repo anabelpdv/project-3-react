@@ -24,7 +24,8 @@ export default class Home extends React.Component {
                 <h1> Home Page </h1>
                 <p> Welcome to the best app ever! ❤️ </p>
                 <AddLocation></AddLocation>
-                <Map></Map>
+                {this.props.ready &&
+                <Map ready={this.props.ready} allLocations={this.props.allLocations}></Map>}
             </section>
         )
     }

@@ -15,8 +15,7 @@ export default class Map extends Component {
     this.renderMap();
   }
 
-
-  loadScript = (url)=>{
+  loadScript=(url)=>{
     let index = window.document.getElementsByTagName('script')[0];
     let script = window.document.createElement('script');
     script.src = url;
@@ -31,32 +30,34 @@ export default class Map extends Component {
     window.initMap = this.initMap;
   }
 /*****************************************/
-  addMarker = (location,info) => {
-    var marker = new window.google.maps.Marker({
-      position: location,
-      map: this.state.map
-    });
-    let infowindow = new window.google.maps.InfoWindow({
-      content: `<div> <button>Submit</button>${info}</div>`
-    })
-    marker.addListener('mouseover',function(){
-      infowindow.open(this.map,marker);
-    })
+  addMarker = () => {
 
-    marker.addListener('mouseout',function(){
-      infowindow.close();
-    })
+    console.log('Anabbel')
+    for(let locations = 0; locations < this.props.allLocations.length; locations++){
 
-    let markersCopy = [...this.state.markers] 
+      
+        const lat = this.props.allLocations[locations].lat;
+        const lng = this.props.allLocations[locations].lng;
+        
+        var marker = new window.google.maps.Marker({
+          position: {lat: lat, lng: lng},
+          map: this.state.map
+        });
 
-    markersCopy.push(marker);
+        let markersCopy = [...this.state.markers] 
 
-    this.setState({
-      markers:markersCopy
-    })
+        markersCopy.push(marker);
+        console.log('This are the markers ',this.state.marker)
+
+        this.setState({
+          markers:markersCopy
+        })
+  }
   
   }
 /*****************************************/
+
+
   initMap = () =>  {
     var myLatlng = {lat:26.6406,lng:-81.8723}
       let map = new window.google.maps.Map(document.getElementById('map'), {
@@ -69,31 +70,31 @@ export default class Map extends Component {
         map:map,
       })
 
-      map.addListener('dblclick', (event)=> {
-        this.addMarker(event.latLng,'this is a test');
-      });
+      this.addMarker();
+
 
     }
 /*********************************************************************/
 
 
-setMapOnAll = (map) => {
-  for (var i = 0; i < this.markers.length; i++) {
-    this.markers[i].setMap(map);
-  }
-}
+    setMapOnAll = (map) => {
+      for (var i = 0; i < this.markers.length; i++) {
+        this.markers[i].setMap(map);
+      }
+    }
 
 
-showMarkers = () => {
-  this.setMapOnAll(this.state.map);
-}
-
+    showMarkers = () => {
+      this.setMapOnAll(this.state.map);
+    }
 
 
 
   render() {
+    
     return (
       <main>
+
         <div id="map"></div>
       </main>
     )
