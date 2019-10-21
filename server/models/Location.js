@@ -8,9 +8,15 @@ const locationSchema = new Schema ({
   description: {
     type: String,
   },
-    lat: {type: Number},
-    lng: {type: Number}
-  
+
+  lat: {
+  	type: Number
+  },
+
+  lng: {
+  	type:
+  	 Number
+  } 
 },
 {
   timestamps: true,
