@@ -13,45 +13,38 @@ export default class AddLocation extends React.Component {
               }
   }
 
-  inputHandle=(e)=>{
-    console.log(e.target.name)
-    const  name  = e.target.name;
-    const value  = e.target.value;
-    this.setState({
-      [name]: value,
-    })
-  }
 
-  formHandle=(e)=>{
-    e.preventDefault()
-    const newLocation = {
-      title:this.state.title,
-      description: this.state.description,
-      lat: this.state.lat,
-      lng: this.state.lng
-    }
 
-    axios.post('http://localhost:5000/api/locations',newLocation)
-          .then(response=>{
-            console.log(response)
-          })
-          .catch(err=>{
-            console.log(err)
-          })
-  }
+  // formHandle=(e)=>{
+  //   e.preventDefault()
+  //   const newLocation = {
+  //     title:this.state.title,
+  //     description: this.state.description,
+  //     lat: this.state.lat,
+  //     lng: this.state.lng
+  //   }
+
+  //   axios.post('http://localhost:5000/api/locations',newLocation)
+  //         .then(response=>{
+  //           this.props.getAllLocations();
+  //         })
+  //         .catch(err=>{
+  //           console.log(err)
+  //         })
+  // }
 
   render() {
     return (
       <div className="add-location-form">
-        <form onSubmit={this.formHandle}>
+        <form onSubmit={(e) =>this.props.formHandle(e)}>
         <label>Title</label>
-        <input onChange={this.inputHandle} type="text" name="title" value={this.state.value}/>
+        <input onChange={this.props.inputHandle} type="text" name="title" value={this.props.title}/>
         <label>Description</label>
-        <input onChange={this.inputHandle} type="text" name="description" value={this.state.description}/>
+        <input onChange={this.props.inputHandle} type="text" name="description" value={this.props.description}/>
         <label>Latitude</label>
-        <input onChange={this.inputHandle} type="number" name="lat" value={this.state.lat}/>
+        <input onChange={this.props.inputHandle} type="number" name="lat" value={this.props.lat}/>
         <label>Longitude</label>
-        <input onChange={this.inputHandle} type="number" name="lng" value={this.state.lng}/>
+        <input onChange={this.props.inputHandle} type="number" name="lng" value={this.props.lng}/>
         <button>Save Location</button>
         </form> 
       </div>

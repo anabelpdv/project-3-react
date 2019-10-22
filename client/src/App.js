@@ -14,17 +14,12 @@ class App extends React.Component{
     super();
     this.state = {
       currentUser: null,
-      allLocations:[],
-      visibleLocations:[],
-      ready: false,
     }
   }
 
   componentDidMount(){
     this.requestUserToDB();
-    this.getAllLocations();
   }
-
 
   requestUserToDB(){
     axios.get("http://localhost:5000/api/checkuser", { withCredentials: true })
@@ -37,20 +32,7 @@ class App extends React.Component{
         })
   }
 
-  getAllLocations(){
-    axios.get("http://localhost:5000/api/locations")
-          .then(response=>{
-            console.log(response.data)
-            this.setState({
-              allLocations: response.data,
-              visibleLocations: response.data,
-              ready:true,
-            })
-          })
-          .catch(err=>{
-            console.log(err)
-          })
-  }
+
 
   syncCurrentUSer(user){
     this.setState({ currentUser: user })
@@ -68,7 +50,7 @@ class App extends React.Component{
           </nav>
         </header>
         <Switch>
-            <Route exact path="/" render={ ()=><Home ready={this.state.ready} allLocations={this.state.visibleLocations}/> }   /> 
+            <Route exact path="/" render={ ()=><Home/> }   /> 
             <Route exact path="/signup-page" render = { () => 
                 <Signup 
                   currentUser = { this.state.currentUser }   

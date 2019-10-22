@@ -10,7 +10,7 @@ export default class Map extends Component {
       markers: [],
     }
   }
-/*****************************************/
+
   componentDidMount(){
     this.renderMap();
   }
@@ -24,18 +24,13 @@ export default class Map extends Component {
     index.parentNode.insertBefore(script,index);
   }
 
-/*****************************************/
   renderMap=()=>{
     this.loadScript(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}&callback=initMap`);
     window.initMap = this.initMap;
   }
-/*****************************************/
+
   addMarker = () => {
-
-    console.log('Anabbel')
     for(let locations = 0; locations < this.props.allLocations.length; locations++){
-
-      
         const lat = this.props.allLocations[locations].lat;
         const lng = this.props.allLocations[locations].lng;
         
@@ -47,19 +42,14 @@ export default class Map extends Component {
         let markersCopy = [...this.state.markers] 
 
         markersCopy.push(marker);
-        console.log('This are the markers ',this.state.marker)
-
         this.setState({
           markers:markersCopy
-        })
+        });
+    }
   }
-  
-  }
-/*****************************************/
-
 
   initMap = () =>  {
-    var myLatlng = {lat:26.6406,lng:-81.8723}
+    var myLatlng = {lat:25.7617,lng:-80.1918}
       let map = new window.google.maps.Map(document.getElementById('map'), {
         center: myLatlng,
         zoom: 9,
@@ -74,8 +64,6 @@ export default class Map extends Component {
 
 
     }
-/*********************************************************************/
-
 
     setMapOnAll = (map) => {
       for (var i = 0; i < this.markers.length; i++) {
@@ -83,19 +71,15 @@ export default class Map extends Component {
       }
     }
 
-
     showMarkers = () => {
       this.setMapOnAll(this.state.map);
     }
-
-
 
   render() {
     
     return (
       <main>
-
-        <div id="map"></div>
+       {/* // <div style={{height: '100vh'}}id="map"> Hello</div> */}
       </main>
     )
   }
