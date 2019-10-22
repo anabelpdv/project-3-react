@@ -19,7 +19,7 @@ export default class Home extends React.Component {
             title:'',
             description:'',
             lat:'',
-            lng:''
+            lng:'',
         }
     }
 
@@ -33,6 +33,17 @@ export default class Home extends React.Component {
 
         this.setState({
             [name]: value,
+        })
+    }
+
+
+
+    inputCoordinatesHandle=(e)=>{
+
+
+        this.setState({
+            lat: e.latLng.lat(),
+            lng:e.latLng.lng()
         })
     }
 
@@ -117,9 +128,7 @@ export default class Home extends React.Component {
         })
 
         map.addListener('dblclick',(e)=>{
-            //console.log(e)
-            // console.log(e.latlng.lat())
-            // console.log(e.latlng.lng())
+            this.inputCoordinatesHandle(e);
         })
     
         this.addMarker();
