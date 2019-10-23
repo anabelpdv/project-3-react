@@ -147,7 +147,6 @@ export default class Home extends React.Component {
     render(){
         return (
             <section>
-                <h1> Dashboard</h1>
                 <div id="map"> Hello</div>
                 <AddLocation 
                     inputHandle={this.inputHandle} 

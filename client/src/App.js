@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import axios from "axios";
 import { Switch, Route, NavLink } from "react-router-dom";
@@ -42,11 +43,11 @@ class App extends React.Component{
     return (
       <div>
           <header>
-          <nav>
-            <NavLink to="/"> Home </NavLink>
-            <NavLink to="/signup-page"> Signup </NavLink>
-            <NavLink to="/login"> Login </NavLink>
-            <NavLink to="/logout"> Logout </NavLink> 
+          <nav className="my-navbar">
+            <NavLink className="navbar-link" to="/">U-Xer</NavLink>
+            <NavLink className="navbar-link" to="/signup-page"> Signup </NavLink>
+            <NavLink className="navbar-link" to="/login"> Login </NavLink>
+            <NavLink className="navbar-link" to="/logout"> Logout </NavLink> 
           </nav>
         </header>
         <Switch>
