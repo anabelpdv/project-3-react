@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import axios from "axios";
 import { Switch, Route, NavLink } from "react-router-dom";
