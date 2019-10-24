@@ -45,7 +45,7 @@ export default class Signup extends React.Component {
       )
     }
     return (
-        <section>
+        <section className="signup-page">
           <h2>Sign up</h2>
             <form onSubmit={this.handleSubmit}>
             <label>Full name:</label>

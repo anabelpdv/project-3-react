@@ -51,7 +51,12 @@ export default class AddLocation extends React.Component {
               </div>
               <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <div className="card-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 
+                  <div>
+                    <img src="" alt=""/>
+                    <input type="file"/>
+                    <button></button>
+                  </div>
+                  
                 </div>
               </div>
             </div>

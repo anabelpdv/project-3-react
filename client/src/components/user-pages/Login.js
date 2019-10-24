@@ -28,9 +28,6 @@ export default class Login extends React.Component {
             })
             .catch(err=>{
               console.log(err)
-              // if(err.response.data){
-              //   return this.setState({ messsage: err.response.data.message })
-              // }
             });
     }
 
@@ -39,7 +36,7 @@ export default class Login extends React.Component {
       const { fullName, email, password } = this.state;
 
       return (
-        <section>
+        <section className="login-page">
           <h2>Log in</h2>
           <form onSubmit={this.handleSubmit}>
             <label>Email:</label>

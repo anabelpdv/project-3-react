@@ -5,7 +5,6 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Signup from "./components/user-pages/Signup";
 import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
-import Logout from "./components/user-pages/Logout";
 import Map from "./components/map-components/Map";
 
 
@@ -32,6 +31,20 @@ class App extends React.Component{
         })
   }
 
+  logout=()=>{
+    axios.delete('http://localhost:5000/api/logout',{})
+          .then(response=>{
+            console.log(response.data)
+            this.setState({
+              currentUser:null,
+            })
+
+          }) 
+          .catch(err=>{
+            console.log(err);
+          })
+  }
+
 
 
   syncCurrentUSer(user){
@@ -46,7 +59,10 @@ class App extends React.Component{
             <NavLink className="navbar-link" to="/">U-Xer</NavLink>
             <NavLink className="navbar-link" to="/signup-page"> Signup </NavLink>
             <NavLink className="navbar-link" to="/login"> Login </NavLink>
-            <NavLink className="navbar-link" to="/logout"> Logout </NavLink> 
+            <span    className="navbar-link btn-logout"  onClick={this.logout}>Logout</span>  
+            
+
+
           </nav>
         </header>
         <Switch>
@@ -58,11 +74,6 @@ class App extends React.Component{
                 /> 
             }/>
             <Route exact path="/login" render={ ()=> <Login onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  /> }   /> 
-            <Route exact path="/logout" render={ () => 
-                <Logout 
-                currentUser = { this.state.currentUser }
-                onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }
-                /> }/> 
         </Switch>
       </div>
     );
