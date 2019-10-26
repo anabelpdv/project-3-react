@@ -6,6 +6,7 @@ import Signup from "./components/user-pages/Signup";
 import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
 import Map from "./components/map-components/Map";
+import Navbar from './components/Navbar'
 
 
 class App extends React.Component{
@@ -45,8 +46,6 @@ class App extends React.Component{
           })
   }
 
-
-
   syncCurrentUSer(user){
     this.setState({ currentUser: user })
   }
@@ -54,17 +53,7 @@ class App extends React.Component{
   render(){
     return (
       <div>
-          <header>
-          <nav className="my-navbar">
-            <NavLink className="navbar-link" to="/">U-Xer</NavLink>
-            <NavLink className="navbar-link" to="/signup-page"> Signup </NavLink>
-            <NavLink className="navbar-link" to="/login"> Login </NavLink>
-            <span    className="navbar-link btn-logout"  onClick={this.logout}>Logout</span>  
-            
-
-
-          </nav>
-        </header>
+        <Navbar logout={this.logout}></Navbar>
         <Switch>
             <Route exact path="/" render={ ()=><Home/> }   /> 
             <Route exact path="/signup-page" render = { () => 

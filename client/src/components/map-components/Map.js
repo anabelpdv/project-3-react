@@ -15,6 +15,7 @@ export default class Map extends Component {
     this.renderMap();
   }
 
+
   loadScript=(url)=>{
     let index = window.document.getElementsByTagName('script')[0];
     let script = window.document.createElement('script');
@@ -60,9 +61,11 @@ export default class Map extends Component {
         map:map,
       })
 
+      map.addListener('dblclick',(e)=>{
+        this.props.inputCoordinatesHandle(e);
+    })
+
       this.addMarker();
-
-
     }
 
     setMapOnAll = (map) => {
@@ -79,7 +82,7 @@ export default class Map extends Component {
     
     return (
       <main>
-       {/* // <div style={{height: '100vh'}}id="map"> Hello</div> */}
+        <div id="map"></div> 
       </main>
     )
   }

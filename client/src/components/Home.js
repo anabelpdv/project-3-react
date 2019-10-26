@@ -20,6 +20,7 @@ export default class Home extends React.Component {
             description:'',
             lat:'',
             lng:'',
+            imageUrl:'',
         }
     }
 
@@ -27,7 +28,7 @@ export default class Home extends React.Component {
         this.getAllLocations();
     }
 
-    inputHandle=(e)=>{
+    inputHandler=(e)=>{
         const name = e.target.name;
         const value = e.target.value;
 
@@ -36,24 +37,21 @@ export default class Home extends React.Component {
         })
     }
 
-
-
     inputCoordinatesHandle=(e)=>{
-
-
         this.setState({
             lat: e.latLng.lat(),
             lng:e.latLng.lng()
         })
     }
 
-    formHandle=(e)=>{
+    formHandler=(e)=>{
         e.preventDefault()
         const newLocation = {
             title:this.state.title,
             description: this.state.description,
             lat: this.state.lat,
-            lng: this.state.lng
+            lng: this.state.lng,
+            imageUrl: this.state.imageUrl,
         }
     
         axios.post('http://localhost:5000/api/locations',newLocation)
@@ -65,6 +63,23 @@ export default class Home extends React.Component {
                 })
     }
 
+    fileUploadHandler = (e) =>{ 
+        console.log('The file to be uploaded is: ', e.target.files[0]);
+        const uploadData = new FormData();
+        uploadData.append('imageUrl', e.target.files[0])
+    
+        axios.post('http://localhost:5000/api/uploads',uploadData)
+            .then(res =>{
+                //********After file is uploaded this line takes time to execute and if save is hit before the same image is save in MongoDb twice
+                //*************************** */
+                //*************************** */
+                this.setState({imageUrl: res.data.secure_url});
+            })
+            .catch(err=>{
+                console.log('Error while uploading the file: ', err);
+            });
+    }
+
     getAllLocations=()=>{
         axios.get("http://localhost:5000/api/locations")
                 .then(response=>{
@@ -73,7 +88,7 @@ export default class Home extends React.Component {
                         visibleLocations: response.data,
                         ready:true,
                     },()=>{
-                        this.renderMap();
+                     //this.renderMap()
                     })
                 })
                 .catch(err=>{
@@ -81,76 +96,19 @@ export default class Home extends React.Component {
                 })
     }
 
-    loadScript = (url)=>{
-        let index = window.document.getElementsByTagName('script')[0];
-        let script = window.document.createElement('script');
-        script.src = url;
-        script.async = true;
-        script.defer = true;
-        index.parentNode.insertBefore(script,index);
-    }
-    
-    renderMap(){
-        console.log('Aanbel')
-        this.loadScript(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}&callback=initMap`);
-        window.initMap = this.initMap;
-    }
-
-    addMarker = () => {
-        for(let locations = 0; locations < this.state.allLocations.length; locations++){
-            const lat = this.state.allLocations[locations].lat;
-            const lng = this.state.allLocations[locations].lng;
-            
-            var marker = new window.google.maps.Marker({
-                position: {lat: lat, lng: lng},
-                map: this.state.map
-            });
-    
-            let markersCopy = [...this.state.markers] 
-    
-            markersCopy.push(marker);
-            this.setState({
-                markers:markersCopy
-            });
-        }
-    }
-
-    initMap = () =>  {
-        var myLatlng = {lat:25.7617,lng:-80.1918}
-        let map = new window.google.maps.Map(document.getElementById('map'), {
-            center: myLatlng,
-            zoom: 9,
-            styles: mapStyle,
-            disableDoubleClickZoom: true,
-        });
-        this.setState({
-            map:map,
-        })
-
-        map.addListener('dblclick',(e)=>{
-            this.inputCoordinatesHandle(e);
-        })
-    
-        this.addMarker();
-    }
-
-    showMarkers = () => {
-        this.setMapOnAll(this.state.map);
-    }
-    
-    setMapOnAll = (map) => {
-        for (var i = 0; i < this.markers.length; i++) {
-            this.markers[i].setMap(map);
-        }
-    }
-
     render(){
         return (
             <section>
-                <div id="map"> Hello</div>
+                {this.state.ready &&
+                                        <Map 
+                                            allLocations={this.state.allLocations}
+                                            inputCoordinatesHandle={this.inputCoordinatesHandle}
+                                        />
+                }
                 <AddLocation 
-                    inputHandle={this.inputHandle} 
-                    formHandle={this.formHandle} 
+                    inputHandler={this.inputHandler} 
+                    fileUploadHandler={this.fileUploadHandler}
+                    formHandler={this.formHandler} 
                     getAllLocations={this.getAllLocations} 
                     title={this.state.title} 
                     description={this.state.description}
@@ -161,3 +119,4 @@ export default class Home extends React.Component {
         )
     }
 }
+
