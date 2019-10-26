@@ -15,6 +15,12 @@ export default class Map extends Component {
     this.renderMap();
   }
 
+  componentDidUpdate(prevprops, prevstate){
+    if(prevprops.allLocations.length !== this.props.allLocations.length){
+      this.addMarker();
+    }
+  }
+
 
   loadScript=(url)=>{
     let index = window.document.getElementsByTagName('script')[0];
@@ -79,6 +85,8 @@ export default class Map extends Component {
     }
 
   render() {
+
+    console.log('its re-rendering')
     
     return (
       <main>

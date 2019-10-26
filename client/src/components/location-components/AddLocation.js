@@ -5,7 +5,9 @@ export default class AddLocation extends React.Component {
 
   constructor(props){
     super(props);
-    this.state={}
+    this.state={
+      images:[],
+    }
   }
 
 

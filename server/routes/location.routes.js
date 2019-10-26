@@ -5,8 +5,9 @@ const router = express.Router();
 const Location = require('../models/Location');
 
 
-
-router.post("/api/locations", (req,res,next)=>{
+const uploader = require('../configs/cloudinary-setup');
+router.post("/api/locations",uploader.single('imageUrl'), (req,res,next)=>{
+  console.log('#########################################This is my body: ',req.body)
 
   Location
           .create(req.body)

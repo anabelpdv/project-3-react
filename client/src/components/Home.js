@@ -2,7 +2,7 @@ import React from "react";
 import axios from 'axios'
 import AddLocation from "./location-components/AddLocation";
 import Map from "./map-components/Map";
-import mapStyle from '../mapStyles';
+
 
 
 
@@ -20,7 +20,7 @@ export default class Home extends React.Component {
             description:'',
             lat:'',
             lng:'',
-            imageUrl:'',
+            imageUrl:null,
         }
     }
 
@@ -46,15 +46,29 @@ export default class Home extends React.Component {
 
     formHandler=(e)=>{
         e.preventDefault()
-        const newLocation = {
-            title:this.state.title,
-            description: this.state.description,
-            lat: this.state.lat,
-            lng: this.state.lng,
-            imageUrl: this.state.imageUrl,
-        }
-    
-        axios.post('http://localhost:5000/api/locations',newLocation)
+
+        const uploadData = new FormData();
+        
+        uploadData.append('title', this.state.title);
+        uploadData.append('description', this.state.description);
+        uploadData.append('lat', this.state.lat);
+        uploadData.append('lng', this.state.lng);
+        uploadData.append('imageUrl', this.state.imageUrl);
+
+
+        // <input type="file" name="the-image"/>
+
+
+        // app.post(req, res, next, uploadMagic.single('image') ,()=>{
+
+        //     console.log(req.file)
+
+        // })
+
+
+
+        
+        axios.post('http://localhost:5000/api/locations',uploadData)
                 .then(response=>{
                     this.getAllLocations();
                     this.setState({
@@ -71,6 +85,10 @@ export default class Home extends React.Component {
     }
 
     fileUploadHandler = (e) =>{ 
+
+        this.setState({img:  e.target.files[0]})
+
+
         console.log('The file to be uploaded is: ', e.target.files[0]);
         const uploadData = new FormData();
         uploadData.append('imageUrl', e.target.files[0])
@@ -104,6 +122,7 @@ export default class Home extends React.Component {
     }
 
     render(){
+        console.log('rendering home component')
         return (
             <section>
                 {this.state.ready &&
