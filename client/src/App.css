@@ -52,6 +52,30 @@
   padding:20px;
 }
 
+.image-box{
+  position:relative;
+  width:180px;
+  height:140px;
+}
+
+.image-input{
+  position:relative;
+  opacity:0;
+  width:180px;
+  height:140px;
+  z-index:1000;
+}
+
+.image-button{
+  color: white;
+  position:basolute;
+  background-color:rgba(244,129,135,0.2);
+  position:absolute;
+  width:180px;;
+  top:0;
+  bottom:0;
+}
+
 .login-page{
   padding-top:80px;
 }

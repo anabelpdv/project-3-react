@@ -29,8 +29,10 @@ export default class AddLocation extends React.Component {
               <label>Longitude</label>
               <input onChange={this.props.inputHandler} type="number" name="lng" value={this.props.lng}/>
           </div>
-          <div>
-            <input type="file" onChange={this.props.fileUploadHandler}/>
+          <div className="image-box">
+            <button className='image-button'>Image 1</button>
+            <img src="" alt=""/>
+            <input className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
           </div>
           <button>Save Location</button>
         </form> 

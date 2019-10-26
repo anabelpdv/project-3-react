@@ -57,6 +57,13 @@ export default class Home extends React.Component {
         axios.post('http://localhost:5000/api/locations',newLocation)
                 .then(response=>{
                     this.getAllLocations();
+                    this.setState({
+                        title:'',
+                        description:'',
+                        lat:'',
+                        lng:'',
+                        imageUrl:'',
+                    })
                 })
                 .catch(err=>{
                     console.log(err)
