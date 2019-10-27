@@ -38,6 +38,7 @@ export default class AddLocation extends React.Component {
           </div>
           <button>Save Location</button>
         </form> 
+        <button onClick={this.props.addLocationToggle}>Cancel</button>
       </div>
     )
   }

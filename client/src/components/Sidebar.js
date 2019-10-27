@@ -11,6 +11,7 @@ export default class Sidebar extends React.Component {
               <p className="user-name">User Name</p>
         </div>
         <div className="sidebar-element">
+          <button onClick={this.props.addLocationToggle}>Add Location</button>
           <NavLink to=""><p>Add Location</p></NavLink>
         </div>
         <div className="sidebar-element">
@@ -22,5 +23,5 @@ export default class Sidebar extends React.Component {
         </div>
       </div>
     )
-  }
+  } 
 }

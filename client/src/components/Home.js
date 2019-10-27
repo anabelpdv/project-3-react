@@ -22,11 +22,39 @@ export default class Home extends React.Component {
             lat:'',
             lng:'',
             imageUrl:null,
+            addLocation:false,
         }
     }
 
     componentDidMount(){
         this.getAllLocations();
+    }
+
+    addLocationToggle=()=>{
+        this.setState({
+            addLocation:!this.state.addLocation,
+        })
+    }
+
+    addLocationRender=()=>{
+        if(this.state.addLocation){
+            return(
+                <div>
+                    <AddLocation 
+                        inputHandler={this.inputHandler} 
+                        fileUploadHandler={this.fileUploadHandler}
+                        formHandler={this.formHandler} 
+                        getAllLocations={this.getAllLocations} 
+                        title={this.state.title} 
+                        description={this.state.description}
+                        lat={this.state.lat} 
+                        lng={this.state.lng}
+                        addLocationToggle={this.addLocationToggle}
+                        >
+                    </AddLocation>
+                </div>
+            )
+        }     
     }
 
     inputHandler=(e)=>{
@@ -56,18 +84,6 @@ export default class Home extends React.Component {
         uploadData.append('lng', this.state.lng);
         uploadData.append('imageUrl', this.state.imageUrl);
 
-
-        // <input type="file" name="the-image"/>
-
-
-        // app.post(req, res, next, uploadMagic.single('image') ,()=>{
-
-        //     console.log(req.file)
-
-        // })
-
-
-
         
         axios.post('http://localhost:5000/api/locations',uploadData)
                 .then(response=>{
@@ -96,9 +112,6 @@ export default class Home extends React.Component {
     
         axios.post('http://localhost:5000/api/uploads',uploadData)
             .then(res =>{
-                //********After file is uploaded this line takes time to execute and if save is hit before the same image is save in MongoDb twice
-                //*************************** */
-                //*************************** */
                 this.setState({imageUrl: res.data.secure_url});
             })
             .catch(err=>{
@@ -132,18 +145,13 @@ export default class Home extends React.Component {
                                             inputCoordinatesHandle={this.inputCoordinatesHandle}
                                         />
                 }
-                <AddLocation 
-                    inputHandler={this.inputHandler} 
-                    fileUploadHandler={this.fileUploadHandler}
-                    formHandler={this.formHandler} 
-                    getAllLocations={this.getAllLocations} 
-                    title={this.state.title} 
-                    description={this.state.description}
-                    lat={this.state.lat} 
-                    lng={this.state.lng}>
-                </AddLocation>
+                
+                {this.addLocationRender()}
 
-                <Sidebar></Sidebar>
+                <Sidebar 
+                    addLocationToggle={this.addLocationToggle}
+                    >
+                </Sidebar>
                 
             </section>
         )
