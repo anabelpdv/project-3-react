@@ -2,6 +2,7 @@ import React from "react";
 import axios from 'axios'
 import AddLocation from "./location-components/AddLocation";
 import Map from "./map-components/Map";
+import Sidebar from "./Sidebar";
 
 
 
@@ -141,6 +142,9 @@ export default class Home extends React.Component {
                     lat={this.state.lat} 
                     lng={this.state.lng}>
                 </AddLocation>
+
+                <Sidebar></Sidebar>
+                
             </section>
         )
     }

@@ -41,10 +41,23 @@ export default class Map extends Component {
         const lat = this.props.allLocations[locations].lat;
         const lng = this.props.allLocations[locations].lng;
         
-        var marker = new window.google.maps.Marker({
+        let marker = new window.google.maps.Marker({
           position: {lat: lat, lng: lng},
           map: this.state.map
         });
+
+        let infowindow = new window.google.maps.InfoWindow({
+          content:`
+          <div class="container-infoWindow">
+          <h6>${this.props.allLocations[locations].title}</h6>
+          <img class="image-infoWindow" src="${this.props.allLocations[locations].imageUrl}">
+          </div>
+          `
+        });
+        marker.addListener('click', function() {
+          infowindow.open(this.map, marker);
+        });
+
 
         let markersCopy = [...this.state.markers] 
 
@@ -83,6 +96,8 @@ export default class Map extends Component {
     showMarkers = () => {
       this.setMapOnAll(this.state.map);
     }
+    
+    
 
   render() {
 
