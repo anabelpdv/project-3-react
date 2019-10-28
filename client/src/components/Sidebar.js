@@ -12,14 +12,12 @@ export default class Sidebar extends React.Component {
         </div>
         <div className="sidebar-element">
           <button onClick={this.props.addLocationToggle}>Add Location</button>
-          <NavLink to=""><p>Add Location</p></NavLink>
         </div>
         <div className="sidebar-element">
-          <NavLink to=""><p>Favorites</p></NavLink>
+          <button>Favorites</button>
         </div>
         <div className="sidebar-element">
-          <p>Search</p>
-          <input type="text"/>
+          <button>Search</button>
         </div>
       </div>
     )

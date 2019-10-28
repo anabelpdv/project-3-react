@@ -5,7 +5,7 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Signup from "./components/user-pages/Signup";
 import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
-import Map from "./components/map-components/Map";
+import Map from "./components/Map";
 import Navbar from './components/Navbar'
 
 

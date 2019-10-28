@@ -1,8 +1,9 @@
 import React from "react";
 import axios from 'axios'
-import AddLocation from "./location-components/AddLocation";
-import Map from "./map-components/Map";
+import AddLocation from "./AddLocation";
+import Map from "./Map";
 import Sidebar from "./Sidebar";
+//import LocationDetails from "./LocationDetails";
 
 
 
@@ -152,7 +153,8 @@ export default class Home extends React.Component {
                     addLocationToggle={this.addLocationToggle}
                     >
                 </Sidebar>
-                
+                {/* <LocationDetails></LocationDetails>
+                 */}
             </section>
         )
     }

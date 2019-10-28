@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import mapStyle from '../../mapStyles';
+import mapStyle from '../mapStyles';
+import { Link } from "react-router-dom";
+import ReactDOMServer from "react-dom/server";
+
 
 export default class Map extends Component {
 
@@ -36,6 +39,17 @@ export default class Map extends Component {
     window.initMap = this.initMap;
   }
 
+    InfoWindowContent (location){
+      return(
+        <div className="container-infoWindow">
+          <h6>{location.title}</h6>
+          <img className="image-infoWindow" src={location.imageUrl}/>
+          </div>
+      )
+    }
+    
+
+
   addMarker = () => {
     for(let locations = 0; locations < this.props.allLocations.length; locations++){
         const lat = this.props.allLocations[locations].lat;
@@ -47,14 +61,12 @@ export default class Map extends Component {
         });
 
         let infowindow = new window.google.maps.InfoWindow({
-          content:`
-          <div class="container-infoWindow">
-          <h6>${this.props.allLocations[locations].title}</h6>
-          <img class="image-infoWindow" src="${this.props.allLocations[locations].imageUrl}">
-          </div>
-          `
+          content:'',
         });
-        marker.addListener('click', function() {
+
+        marker.addListener('click', ()=>{
+          const content = ReactDOMServer.renderToString(this.InfoWindowContent(this.props.allLocations[locations]));
+          infowindow.setContent(content);
           infowindow.open(this.map, marker);
         });
 
