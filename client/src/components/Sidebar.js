@@ -19,6 +19,9 @@ export default class Sidebar extends React.Component {
         <div className="sidebar-element">
           <button>Search</button>
         </div>
+        <div className="sidebar-element">
+          <button>List All</button>
+        </div>
       </div>
     )
   } 

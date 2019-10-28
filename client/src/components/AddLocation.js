@@ -16,29 +16,59 @@ export default class AddLocation extends React.Component {
       <div className="add-location-form">
         <form onSubmit={(e) =>this.props.formHandler(e)}>
           <div>
-              <label>Title</label>
-              <input onChange={this.props.inputHandler} type="text" name="title" value={this.props.title}/>
+              <p>Title</p>
+              <input className="input-element" onChange={this.props.inputHandler} type="text" name="title" value={this.props.title}/>
+          </div>
+          <div >
+              <p>Description</p>
+              <textarea className="textarea-element" onChange={this.props.inputHandler} type="text" name="description" value={this.props.description}/>
           </div>
           <div>
-              <label>Description</label>
-              <input onChange={this.props.inputHandler} type="text" name="description" value={this.props.description}/>
+              <p>Latitude</p>
+              <input className="input-element" onChange={this.props.inputHandler} type="number" name="lat" value={this.props.lat}/>
           </div>
           <div>
-              <label>Latitude</label>
-              <input onChange={this.props.inputHandler} type="number" name="lat" value={this.props.lat}/>
+              <p>Longitude</p>
+              <input className="input-element" onChange={this.props.inputHandler} type="number" name="lng" value={this.props.lng}/>
           </div>
           <div>
-              <label>Longitude</label>
-              <input onChange={this.props.inputHandler} type="number" name="lng" value={this.props.lng}/>
+          <div className="images-container">
+            <div className="image-box">
+              <button className='image-button'>Image 1</button>
+              <img src="" alt=""/>
+              <input name="image1" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
+            </div>
+            <div className="image-box">
+              <button className='image-button'>Image 2</button>
+              <img src="" alt=""/>
+              <input name="image2" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
+            </div>
+            <div className="image-box">
+              <button className='image-button'>Image 3</button>
+              <img src="" alt=""/>
+              <input name="image3" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
+            </div>
+            <div className="image-box">
+              <button className='image-button'>Image 4</button>
+              <img src="" alt=""/>
+              <input name="image4" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
+            </div>
+            <div className="image-box">
+              <button className='image-button'>Image 5</button>
+              <img src="" alt=""/>
+              <input name="image5" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
+            </div>
+            <div className="image-box">
+              <button className='image-button'>Image 6</button>
+              <img src="" alt=""/>
+              <input name="image6" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
+            </div>
           </div>
-          <div className="image-box">
-            <button className='image-button'>Image 1</button>
-            <img src="" alt=""/>
-            <input className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
           </div>
-          <button>Save Location</button>
+          <button className="btn">Save</button>
+          <button className="btn" onClick={this.props.addLocationToggle}>Cancel</button>
         </form> 
-        <button onClick={this.props.addLocationToggle}>Cancel</button>
+        
       </div>
     )
   }

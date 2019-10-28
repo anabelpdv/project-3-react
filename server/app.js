@@ -56,7 +56,7 @@ app.locals.title = 'Express - Generated with IronGenerator';
 app.use('/', require('./routes/location.routes'))
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/auth.routes'))
-app.use('/', require('./routes/file-upload-routes'));
+//app.use('/', require('./routes/file-upload-routes'));
 
 
 module.exports = app;

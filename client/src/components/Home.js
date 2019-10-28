@@ -3,7 +3,6 @@ import axios from 'axios'
 import AddLocation from "./AddLocation";
 import Map from "./Map";
 import Sidebar from "./Sidebar";
-//import LocationDetails from "./LocationDetails";
 
 
 
@@ -22,7 +21,7 @@ export default class Home extends React.Component {
             description:'',
             lat:'',
             lng:'',
-            imageUrl:null,
+            imageUrl:[],
             addLocation:false,
         }
     }
@@ -34,6 +33,11 @@ export default class Home extends React.Component {
     addLocationToggle=()=>{
         this.setState({
             addLocation:!this.state.addLocation,
+            title:'',
+            description:'',
+            lat:'',
+            lng:'',
+            imageUrl:[],
         })
     }
 
@@ -67,6 +71,15 @@ export default class Home extends React.Component {
         })
     }
 
+    fileUploadHandler = (e) =>{ 
+        //const name = e.target.name;
+        let copy = [...this.state.imageUrl]
+        copy.push(e.target.files[0])
+        //console.log(copy)
+    
+        this.setState({imageUrl: copy})
+        
+    }
     inputCoordinatesHandle=(e)=>{
         this.setState({
             lat: e.latLng.lat(),
@@ -76,14 +89,22 @@ export default class Home extends React.Component {
 
     formHandler=(e)=>{
         e.preventDefault()
-
         const uploadData = new FormData();
-        
         uploadData.append('title', this.state.title);
         uploadData.append('description', this.state.description);
         uploadData.append('lat', this.state.lat);
         uploadData.append('lng', this.state.lng);
-        uploadData.append('imageUrl', this.state.imageUrl);
+
+        
+
+        this.state.imageUrl.forEach((image,index) =>{
+            uploadData.append('imageUrl', this.state.imageUrl[index]);
+        })
+
+
+        //uploadData.append('imageUrl', this.state.imageUrl2);
+
+
 
         
         axios.post('http://localhost:5000/api/locations',uploadData)
@@ -96,28 +117,11 @@ export default class Home extends React.Component {
                         lng:'',
                         imageUrl:'',
                     })
+                    this.addLocationToggle()
                 })
                 .catch(err=>{
                     console.log(err)
                 })
-    }
-
-    fileUploadHandler = (e) =>{ 
-
-        this.setState({img:  e.target.files[0]})
-
-
-        console.log('The file to be uploaded is: ', e.target.files[0]);
-        const uploadData = new FormData();
-        uploadData.append('imageUrl', e.target.files[0])
-    
-        axios.post('http://localhost:5000/api/uploads',uploadData)
-            .then(res =>{
-                this.setState({imageUrl: res.data.secure_url});
-            })
-            .catch(err=>{
-                console.log('Error while uploading the file: ', err);
-            });
     }
 
     getAllLocations=()=>{
@@ -127,8 +131,6 @@ export default class Home extends React.Component {
                         allLocations: response.data,
                         visibleLocations: response.data,
                         ready:true,
-                    },()=>{
-                     //this.renderMap()
                     })
                 })
                 .catch(err=>{
@@ -144,6 +146,7 @@ export default class Home extends React.Component {
                                         <Map 
                                             allLocations={this.state.allLocations}
                                             inputCoordinatesHandle={this.inputCoordinatesHandle}
+                                            addLocationToggle={this.addLocationToggle}
                                         />
                 }
                 
@@ -153,8 +156,7 @@ export default class Home extends React.Component {
                     addLocationToggle={this.addLocationToggle}
                     >
                 </Sidebar>
-                {/* <LocationDetails></LocationDetails>
-                 */}
+                
             </section>
         )
     }

@@ -35,7 +35,7 @@ export default class Map extends Component {
   }
 
   renderMap=()=>{
-    this.loadScript(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}&callback=initMap`);
+    this.loadScript(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}&libraries=places&callback=initMap`);
     window.initMap = this.initMap;
   }
 
@@ -80,19 +80,62 @@ export default class Map extends Component {
     }
   }
 
+
+  getUserLocation=()=>{
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position)=> {
+        // var myLatlng = {
+        //   lat: position.coords.latitude,
+        //   lng: position.coords.longitude
+        // };
+
+      return position;
+    })
+  }
+
+  }
+
   initMap = () =>  {
+
+
     var myLatlng = {lat:25.7617,lng:-80.1918}
-      let map = new window.google.maps.Map(document.getElementById('map'), {
-        center: myLatlng,
-        zoom: 9,
-        styles: mapStyle,
-        disableDoubleClickZoom: true,
-      });
+  
+      let map = new window.google.maps.Map(document.getElementById('map'),{styles: mapStyle,disableDoubleClickZoom: true });
+
+
+
+      navigator.geolocation.getCurrentPosition(function(position) {
+        // Center on user's current location if geolocation prompt allowed
+        var initialLocation = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude-0.7);
+        map.setCenter(initialLocation);
+        map.style=mapStyle;
+        map.setZoom(9);
+      }, function(positionError) {
+        // User denied geolocation prompt - default to Chicago
+        map.setCenter(new window.google.maps.LatLng(35.74750449199224, -86.7035884912965));
+        map.style=mapStyle;
+        map.setZoom(5);
+  });
+
+
+
+
+
+
+
+      // , {
+      //   center: myLatlng,
+      //   zoom: 9,
+      //   styles: mapStyle,
+      //   disableDoubleClickZoom: true,
+      // });
       this.setState({
         map:map,
       })
 
       map.addListener('dblclick',(e)=>{
+        this.props.addLocationToggle();
         this.props.inputCoordinatesHandle(e);
     })
 
@@ -112,7 +155,8 @@ export default class Map extends Component {
     
 
   render() {
-
+    console.log(this.getUserLocation())
+    
     console.log('its re-rendering')
     
     return (

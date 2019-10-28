@@ -6,11 +6,24 @@ const Location = require('../models/Location');
 
 
 const uploader = require('../configs/cloudinary-setup');
-router.post("/api/locations",uploader.single('imageUrl'), (req,res,next)=>{
-  console.log('#########################################This is my body: ',req.body)
+router.post("/api/locations",uploader.array('imageUrl',6), (req,res,next)=>{
+
+let imagesArray=[];
+  req.files.forEach(image=>{
+    imagesArray.push(image.secure_url)
+  })
+
+  console.log(imagesArray);
+  const newLocation ={
+    title: req.body.title,
+    description: req.body.description,
+    lat:req.body.lat,
+    lng:req.body.lng,
+    imageUrl:imagesArray,
+  }
 
   Location
-          .create(req.body)
+          .create(newLocation)
           .then(response=>{
             res.status(200).json(response);
           })
@@ -19,7 +32,6 @@ router.post("/api/locations",uploader.single('imageUrl'), (req,res,next)=>{
           })
 
 });
-
 
 router.get('/api/locations', (req,res,next)=>{
 
