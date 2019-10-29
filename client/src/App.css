@@ -117,14 +117,13 @@
   position:relative;
   width:90px;
   height:80px;
-  
 }
 
 .image-input{
   position:relative;
   opacity:0;
   width:90px;
-  height:75px;
+  height:80px;
   z-index:1000;
 }
 

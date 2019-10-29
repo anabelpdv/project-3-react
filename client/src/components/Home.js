@@ -23,6 +23,7 @@ export default class Home extends React.Component {
             lng:'',
             imageUrl:[],
             addLocation:false,
+            details:false,
         }
     }
 
@@ -40,6 +41,17 @@ export default class Home extends React.Component {
             imageUrl:[],
         })
     }
+    detailsToggle=()=>{
+        this.setState({
+            addLocation:!this.state.addLocation,
+            title:'',
+            description:'',
+            lat:'',
+            lng:'',
+            imageUrl:[],
+        })
+    }
+
 
     addLocationRender=()=>{
         if(this.state.addLocation){

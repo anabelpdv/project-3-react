@@ -43,8 +43,12 @@ export default class Map extends Component {
       return(
         <div className="container-infoWindow">
           <h6>{location.title}</h6>
-          <img className="image-infoWindow" src={location.imageUrl}/>
-          </div>
+          <img className="image-infoWindow" src={location.imageUrl[0]}/>
+          <button onClick="">Details</button>
+
+        
+
+        </div>
       )
     }
     
@@ -118,18 +122,6 @@ export default class Map extends Component {
         map.setZoom(5);
   });
 
-
-
-
-
-
-
-      // , {
-      //   center: myLatlng,
-      //   zoom: 9,
-      //   styles: mapStyle,
-      //   disableDoubleClickZoom: true,
-      // });
       this.setState({
         map:map,
       })

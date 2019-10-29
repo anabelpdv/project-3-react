@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
 import Map from "./components/Map";
 import Navbar from './components/Navbar'
+import LocationDetails from './components/LocationDetails'
 
 
 class App extends React.Component{
@@ -63,6 +64,7 @@ class App extends React.Component{
                 /> 
             }/>
             <Route exact path="/login" render={ ()=> <Login onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  /> }   /> 
+            <Route exact path="/details" render={ ()=> <LocationDetails onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  /> }   /> 
         </Switch>
       </div>
     );
