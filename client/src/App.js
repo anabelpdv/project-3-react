@@ -8,6 +8,7 @@ import Login from "./components/user-pages/Login";
 import Map from "./components/Map";
 import Navbar from './components/Navbar'
 import LocationDetails from './components/LocationDetails'
+import Sidebar from './components/Sidebar'
 
 
 
@@ -56,6 +57,11 @@ class App extends React.Component{
     return (
       <div>
         <Navbar logout={this.logout}></Navbar>
+        <Sidebar 
+                    
+                    
+                    >
+                </Sidebar>
         <Switch>
             <Route exact path="/" render={ ()=><Home/> }   /> 
             <Route exact path="/signup-page" render = { () => 

@@ -9,7 +9,8 @@ export default class LocationDetails extends React.Component {
   render() {
     return (
       <div className="location-details-container">
-        <h1>Anabel anabel anabe;</h1>
+        <h1>Details page</h1>
+        <div>Hello</div>
       </div>
     )
   }

@@ -46,6 +46,7 @@ export default class Map extends Component {
         <div className="container-infoWindow">
           <h6>{location.title}</h6>
           <img className="image-infoWindow" src={location.imageUrl[0]}/>
+          
           <BrowserRouter> 
             <Link to="/details">Details</Link>
           </BrowserRouter>
