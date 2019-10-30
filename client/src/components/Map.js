@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import mapStyle from '../mapStyles';
-import { Link } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import ReactDOMServer from "react-dom/server";
+import LocationDetails from './LocationDetails'
 
 
 export default class Map extends Component {
@@ -39,20 +40,18 @@ export default class Map extends Component {
     window.initMap = this.initMap;
   }
 
-    InfoWindowContent (location){
+
+    InfoWindowContent =(location)=>{
       return(
         <div className="container-infoWindow">
           <h6>{location.title}</h6>
           <img className="image-infoWindow" src={location.imageUrl[0]}/>
-          <button onClick="">Details</button>
-
-        
-
+          <BrowserRouter> 
+            <Link to="/details">Details</Link>
+          </BrowserRouter>
         </div>
       )
     }
-    
-
 
   addMarker = () => {
     for(let locations = 0; locations < this.props.allLocations.length; locations++){
@@ -68,8 +67,9 @@ export default class Map extends Component {
           content:'',
         });
 
-        marker.addListener('click', ()=>{
-          const content = ReactDOMServer.renderToString(this.InfoWindowContent(this.props.allLocations[locations]));
+        marker.addListener('mouseover', ()=>{
+        const content = ReactDOMServer.renderToString(this.InfoWindowContent(this.props.allLocations[locations]));
+      
           infowindow.setContent(content);
           infowindow.open(this.map, marker);
         });
@@ -84,30 +84,12 @@ export default class Map extends Component {
     }
   }
 
-
-  getUserLocation=()=>{
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position)=> {
-        // var myLatlng = {
-        //   lat: position.coords.latitude,
-        //   lng: position.coords.longitude
-        // };
-
-      return position;
-    })
-  }
-
-  }
-
   initMap = () =>  {
 
 
     var myLatlng = {lat:25.7617,lng:-80.1918}
   
       let map = new window.google.maps.Map(document.getElementById('map'),{styles: mapStyle,disableDoubleClickZoom: true });
-
-
 
       navigator.geolocation.getCurrentPosition(function(position) {
         // Center on user's current location if geolocation prompt allowed
@@ -147,10 +129,6 @@ export default class Map extends Component {
     
 
   render() {
-    console.log(this.getUserLocation())
-    
-    console.log('its re-rendering')
-    
     return (
       <main>
         <div id="map"></div> 

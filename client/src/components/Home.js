@@ -3,6 +3,7 @@ import axios from 'axios'
 import AddLocation from "./AddLocation";
 import Map from "./Map";
 import Sidebar from "./Sidebar";
+import LocationDetails from "./LocationDetails";
 
 
 
@@ -42,13 +43,9 @@ export default class Home extends React.Component {
         })
     }
     detailsToggle=()=>{
+        console.log('Anabellllllllllllllllllllllll')
         this.setState({
-            addLocation:!this.state.addLocation,
-            title:'',
-            description:'',
-            lat:'',
-            lng:'',
-            imageUrl:[],
+            details:!this.state.details,
         })
     }
 
@@ -92,6 +89,7 @@ export default class Home extends React.Component {
         this.setState({imageUrl: copy})
         
     }
+
     inputCoordinatesHandle=(e)=>{
         this.setState({
             lat: e.latLng.lat(),
@@ -107,17 +105,10 @@ export default class Home extends React.Component {
         uploadData.append('lat', this.state.lat);
         uploadData.append('lng', this.state.lng);
 
-        
-
+    
         this.state.imageUrl.forEach((image,index) =>{
             uploadData.append('imageUrl', this.state.imageUrl[index]);
         })
-
-
-        //uploadData.append('imageUrl', this.state.imageUrl2);
-
-
-
         
         axios.post('http://localhost:5000/api/locations',uploadData)
                 .then(response=>{
@@ -159,6 +150,8 @@ export default class Home extends React.Component {
                                             allLocations={this.state.allLocations}
                                             inputCoordinatesHandle={this.inputCoordinatesHandle}
                                             addLocationToggle={this.addLocationToggle}
+                                            detailsToggle={this.detailsToggle}
+                                            
                                         />
                 }
                 
@@ -166,8 +159,14 @@ export default class Home extends React.Component {
 
                 <Sidebar 
                     addLocationToggle={this.addLocationToggle}
+                    
                     >
                 </Sidebar>
+                {this.state.details &&
+                                    <LocationDetails
+                                        >
+                                    </LocationDetails>  
+                }
                 
             </section>
         )

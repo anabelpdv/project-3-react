@@ -10,6 +10,7 @@ import Navbar from './components/Navbar'
 import LocationDetails from './components/LocationDetails'
 
 
+
 class App extends React.Component{
   constructor(){
     super();
@@ -63,8 +64,8 @@ class App extends React.Component{
                   onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }   
                 /> 
             }/>
-            <Route exact path="/login" render={ ()=> <Login onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  /> }   /> 
-            <Route exact path="/details" render={ ()=> <LocationDetails onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  /> }   /> 
+            <Route exact path="/login" render={ ()=> <Login onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  /> } /> 
+            <Route exact path="/details" render={ ()=> <LocationDetails onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  /> } /> 
         </Switch>
       </div>
     );
