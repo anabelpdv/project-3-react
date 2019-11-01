@@ -6,12 +6,20 @@ export default class Navbar extends React.Component {
     return (
       <div>
           <header>
-          <nav className="my-navbar">
-            <NavLink className="navbar-link" to="/">U-Xer</NavLink>
-            <NavLink className="navbar-link" to="/signup-page"> Signup </NavLink>
-            <NavLink className="navbar-link" to="/login"> Login </NavLink>
-            <span className="navbar-link btn-logout"  onClick={this.props.logout}>Logout</span>  
-          </nav>
+            <nav className="my-navbar">
+              { this.props.currentUser ? (
+                <div>
+                <NavLink className="navbar-link" to="/">U-Xer</NavLink>
+                <span className="navbar-link btn-logout"  onClick={this.props.logout}>Logout</span>  
+              </div>
+              ) : (
+                <div>
+                  <NavLink className="navbar-link" to="/signup-page"> Signup </NavLink>
+                  <NavLink className="navbar-link" to="/login"> Login </NavLink>
+                </div>
+              )
+               }
+            </nav>
         </header>
       </div>
     )

@@ -41,14 +41,23 @@ export default class Map extends Component {
   }
 
 
+  hello=()=>{
+    console.log('Hello')
+  }
+
     InfoWindowContent =(location)=>{
       return(
         <div className="container-infoWindow">
           <h6>{location.title}</h6>
+          <h1>{location._id}</h1>
+          <button onClick={this.hello}>Detals</button>
           <img className="image-infoWindow" src={location.imageUrl[0]}/>
-          
           <BrowserRouter> 
-            <Link to="/details">Details</Link>
+            {/* <Link  to={{
+              pathname: "/details",
+              state: { theLocation: true }
+              }}>Details</Link> */}
+              <Link to={`/${location._id}`}>Details </Link>
           </BrowserRouter>
         </div>
       )
@@ -68,8 +77,8 @@ export default class Map extends Component {
           content:'',
         });
 
-        marker.addListener('mouseover', ()=>{
-        const content = ReactDOMServer.renderToString(this.InfoWindowContent(this.props.allLocations[locations]));
+        marker.addListener('click', ()=>{
+          const content = ReactDOMServer.renderToString(this.InfoWindowContent(this.props.allLocations[locations]));
       
           infowindow.setContent(content);
           infowindow.open(this.map, marker);

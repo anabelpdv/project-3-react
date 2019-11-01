@@ -13,7 +13,7 @@ let imagesArray=[];
     imagesArray.push(image.secure_url)
   })
 
-  console.log(imagesArray);
+
   const newLocation ={
     title: req.body.title,
     description: req.body.description,
@@ -58,10 +58,24 @@ router.delete('/api/locations/:id', (req,res,next)=>{
 
 });
 
-router.put('/api/locations/:id', (req,res,next)=>{
+
+router.put('/api/locations/:id', uploader.array('imageUrl',6),(req,res,next)=>{
   
+  let imagesArray=[];
+  req.files.forEach(image=>{
+    imagesArray.push(image.secure_url)
+  })
+
+  const updatedLocation ={
+    title: req.body.title,
+    description: req.body.description,
+    lat:req.body.lat,
+    lng:req.body.lng,
+    imageUrl:imagesArray,
+  }
+ 
   Location
-          .findByIdAndUpdate(req.param)
+          .findByIdAndUpdate(req.params.id,updatedLocation)
           .then(response=>{
             res.status(200).json(response);
           })

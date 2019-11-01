@@ -5,6 +5,11 @@ export default class LocationDetails extends React.Component {
     super(props);
   }
 
+  componentDidMount(){
+    // const { theLocation } = this.props.location.blah;
+    console.log("in details: ", this.props)
+  }
+
 
   render() {
     return (

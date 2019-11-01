@@ -21,19 +21,30 @@ class App extends React.Component{
   }
 
   componentDidMount(){
-    this.requestUserToDB();
-  }
-
-  requestUserToDB(){
+    // this.requestUserToDB();
     axios.get("http://localhost:5000/api/checkuser", { withCredentials: true })
-        .then(response => {
-          const { userDoc } = response.data;
-          this.syncCurrentUSer(userDoc);
-        })
-        .catch(err=>{
+    .then(response => {
+      const { userDoc } = response.data;
+      this.syncCurrentUSer(userDoc);
+      console.log('check user in app: ', userDoc)
+    })
+    .catch(err=>{
+      console.log("hellooooooooooo")
           console.log("Err while getting the user from the checkuser route: ", err)
         })
   }
+
+  // requestUserToDB(){
+  //   axios.get("http://localhost:5000/api/checkuser", { withCredentials: true })
+  //       .then(response => {
+  //         const { userDoc } = response.data;
+  //         this.syncCurrentUSer(userDoc);
+  //         console.log('check user in app: ', userDoc)
+  //       })
+  //       .catch(err=>{
+  //         console.log("Err while getting the user from the checkuser route: ", err)
+  //       })
+  // }
 
   logout=()=>{
     axios.delete('http://localhost:5000/api/logout',{})
@@ -50,13 +61,18 @@ class App extends React.Component{
   }
 
   syncCurrentUSer(user){
+    console.log('is this triggered: ', user)
     this.setState({ currentUser: user })
   }
 
   render(){
+    console.log("user in app: ", this.state.currentUser)
     return (
       <div>
-        <Navbar logout={this.logout}></Navbar>
+        <Navbar 
+          currentUser = { this.state.currentUser }  
+          logout={this.logout}>
+        </Navbar>
         <Sidebar 
                     
                     
@@ -70,8 +86,14 @@ class App extends React.Component{
                   onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }   
                 /> 
             }/>
-            <Route exact path="/login" render={ ()=> <Login onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  /> } /> 
-            <Route exact path="/details" render={ ()=> <LocationDetails onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  /> } /> 
+            <Route exact path="/login" render={ (props)=> 
+              <Login 
+              {...props} 
+              currentUser = { this.state.currentUser }   
+              onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  
+              /> 
+            } /> 
+            <Route exact path="/:id" component = {LocationDetails} /> 
         </Switch>
       </div>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -37,12 +38,9 @@ export default class Signup extends React.Component {
 
     const { fullName, email, password } = this.state;
 
+    console.log("is user in signup: ", this.props.currentUser)
     if(this.props.currentUser){
-      return (
-        <div>
-          <h2>Welcome to your app, {this.props.currentUser.fullName}  You're signed in!</h2>
-        </div>
-      )
+      return <Redirect to='/' />
     }
     return (
         <section className="signup-page">

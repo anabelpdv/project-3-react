@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 
 export default class Login extends React.Component {
 
-    constructor(){
-      super();
+    constructor(props){
+      super(props);
       this.state = {
         email:'',
         password:'',
@@ -20,11 +21,12 @@ export default class Login extends React.Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
-      axios.post('http://localhost:5000/api/login', this.state, { withCredential : true })
+      axios.post('http://localhost:5000/api/login', this.state, { withCredentials : true })
             .then(response=>{
               const { userDoc } = response.data;
+              console.log("user login: ", userDoc)
               this.props.onUserChange(userDoc);
-              alert('You are logged in')
+              this.props.history.push(`/`)
             })
             .catch(err=>{
               console.log(err)
@@ -34,6 +36,10 @@ export default class Login extends React.Component {
 
     render() {
       const { fullName, email, password } = this.state;
+      console.log("user in login: ", this.props.currentUser)
+      if(this.props.currentUser){
+        return <Redirect to='/' />
+      }
 
       return (
         <section className="login-page">
