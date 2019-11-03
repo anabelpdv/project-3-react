@@ -50,15 +50,26 @@ export default class Map extends Component {
         <div className="container-infoWindow">
           <h6>{location.title}</h6>
           <h1>{location._id}</h1>
-          <button onClick={this.hello}>Detals</button>
           <img className="image-infoWindow" src={location.imageUrl[0]}/>
           <BrowserRouter> 
             {/* <Link  to={{
               pathname: "/details",
               state: { theLocation: true }
               }}>Details</Link> */}
-              <Link to={`/${location._id}`}>Details </Link>
+              <Link to={{
+                pathname:'/details',
+                state:{
+                      location: 'Anabel Probando pasar props',
+                }
+              }}>Details </Link>
           </BrowserRouter>
+          {/* <BrowserRouter> 
+            {/* <Link  to={{
+              pathname: "/details",
+              state: { theLocation: true }
+              }}>Details</Link> */}
+              {/* <Link to={`/${location._id}`}>Details </Link>
+          </BrowserRouter> */} 
         </div>
       )
     }

@@ -6,12 +6,12 @@ export default class LocationDetails extends React.Component {
   }
 
   componentDidMount(){
-    // const { theLocation } = this.props.location.blah;
     console.log("in details: ", this.props)
   }
 
 
   render() {
+    console.log('ESTAS SON LAS PROPS', this.props)
     return (
       <div className="location-details-container">
         <h1>Details page</h1>
