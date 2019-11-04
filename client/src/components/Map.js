@@ -12,6 +12,7 @@ export default class Map extends Component {
     this.state = {
       map:'',
       markers: [],
+      notifications: 'Anabelita'
     }
   }
 
@@ -51,18 +52,6 @@ export default class Map extends Component {
           <h6>{location.title}</h6>
           <h1>{location._id}</h1>
           <img className="image-infoWindow" src={location.imageUrl[0]}/>
-          <BrowserRouter> 
-            {/* <Link  to={{
-              pathname: "/details",
-              state: { theLocation: true }
-              }}>Details</Link> */}
-              <Link to={{
-                pathname:'/details',
-                state:{
-                      location: 'Anabel Probando pasar props',
-                }
-              }}>Details </Link>
-          </BrowserRouter>
           {/* <BrowserRouter> 
             {/* <Link  to={{
               pathname: "/details",

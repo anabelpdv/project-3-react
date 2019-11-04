@@ -5,12 +5,10 @@ export default class LocationDetails extends React.Component {
     super(props);
   }
 
-  componentDidMount(){
-    console.log("in details: ", this.props)
-  }
-
 
   render() {
+    console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+    console.log('this are the props you are looking for: ',this.props)
     return (
       <div className="location-details-container">
         <h1>Details page</h1>

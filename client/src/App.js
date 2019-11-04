@@ -66,18 +66,14 @@ class App extends React.Component{
   }
 
   render(){
-    console.log("user in app: ", this.state.currentUser)
     return (
       <div>
         <Navbar 
           currentUser = { this.state.currentUser }  
           logout={this.logout}>
         </Navbar>
-        <Sidebar 
-                    
-                    
-                    >
-                </Sidebar>
+        <Sidebar>
+        </Sidebar>
         <Switch>
             <Route exact path="/" render={ ()=><Home/> }   /> 
             <Route exact path="/signup-page" render = { () => 
