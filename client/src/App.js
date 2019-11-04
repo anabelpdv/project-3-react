@@ -93,7 +93,9 @@ class App extends React.Component{
               onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  
               /> 
             } /> 
-            <Route exact path="/details" component = {LocationDetails} /> 
+            <Route exact path="/details" render={(props)=>
+            <  LocationDetails {...props}/>
+            }  /> 
         </Switch>
       </div>
     );

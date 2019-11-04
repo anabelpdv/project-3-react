@@ -11,7 +11,6 @@ export default class LocationDetails extends React.Component {
 
 
   render() {
-    console.log('ESTAS SON LAS PROPS', this.props)
     return (
       <div className="location-details-container">
         <h1>Details page</h1>
