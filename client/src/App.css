@@ -97,7 +97,11 @@
   height:88vh;
   top:12vh;
   right:0;
-  background-color: rgb(0,0,0,0.98);
+  overflow: scroll;
+  padding:10px 40px;
+  text-align: center;
+  background-color: rgb(0,0,0,0.76);
+  color:#D2C2A2;
 }
 
 .images-container{
@@ -190,9 +194,48 @@
   text-align: center;
 }
 
-.location-details-container{
-
-  width:80vw;
+.details-background{
   height:100vh;
-  background-color: rgb(0,0,0,0.9);
+  width:100vw;
+  background-image: url('/Map1.png');
+  background-size: cover;
+  background-position:center;
+}
+
+
+
+/* ************************************* */
+
+.gallery {
+padding:20px;
+-webkit-column-count: 3;
+-moz-column-count: 3;
+column-count: 3;
+-webkit-column-width: 25%;
+-moz-column-width: 25%;
+column-width: 25%; }
+.gallery .pics {
+-webkit-transition: all 350ms ease;
+transition: all 350ms ease; }
+.gallery .animation {
+-webkit-transform: scale(1);
+-ms-transform: scale(1);
+transform: scale(1); }
+
+@media (max-width: 450px) {
+.gallery {
+-webkit-column-count: 1;
+-moz-column-count: 1;
+column-count: 1;
+-webkit-column-width: 100%;
+-moz-column-width: 100%;
+column-width: 100%;
+}
+}
+
+@media (max-width: 400px) {
+.btn.filter {
+padding-left: 1.1rem;
+padding-right: 1.1rem;
+}
 }
