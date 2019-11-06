@@ -14,8 +14,6 @@ export default class Home extends React.Component {
         super(props);
         this.state={
             map:{},
-            // allLocations:[],
-            // visibleLocations:[],
             markers: [],
             title:'',
             description:'',
@@ -27,9 +25,6 @@ export default class Home extends React.Component {
         }
     }
 
-    // // componentDidMount(){
-    // //     this.getAllLocations();
-    // // }
 
     addLocationToggle=()=>{
         this.setState({
@@ -78,10 +73,8 @@ export default class Home extends React.Component {
     }
 
     fileUploadHandler = (e) =>{ 
-        //const name = e.target.name;
         let copy = [...this.state.imageUrl]
         copy.push(e.target.files[0])
-        //console.log(copy)
     
         this.setState({imageUrl: copy})
         
@@ -147,12 +140,6 @@ export default class Home extends React.Component {
                     
                     >
                 </Sidebar>
-                {this.state.details &&
-                                    <LocationDetails
-                                        >
-                                    </LocationDetails>  
-                }
-                
             </section>
         )
     }

@@ -101,7 +101,7 @@ export default class Map extends Component {
         // Center on user's current location if geolocation prompt allowed
         var initialLocation = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude-0.7);
         map.setCenter(initialLocation);
-        map.style=mapStyle;
+        map.style = mapStyle;
         map.setZoom(9);
       }, function(positionError) {
         // User denied geolocation prompt - default to Chicago

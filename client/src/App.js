@@ -106,7 +106,11 @@ class App extends React.Component{
             } /> 
 
             <Route exact path="/details/:id" render={(props)=>
-                < LocationDetails {...props}/>
+                < LocationDetails 
+                {...props}
+                visibleLocations={this.state.visibleLocations}
+                ready={this.state.ready}
+                />
             }  /> 
         </Switch>
       </div>
