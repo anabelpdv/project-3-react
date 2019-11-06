@@ -58,7 +58,7 @@ authRouter.post('/api/login', (req,res,next)=>{
 
     req.login(userDoc,(err)=>{
       if(err){
-        res.status(500).json({ message:'Something went wrong while gettin user object from DB' });
+        res.status(500).json({ message:'Something went wrong while getting user object from DB' });
         return;
       }
       userDoc.encryptedPassword = undefined;
@@ -66,6 +66,7 @@ authRouter.post('/api/login', (req,res,next)=>{
     })
   })(req,res,next);
 });
+
 
 authRouter.delete('/api/logout', (req,res,next)=>{
   req.logout();

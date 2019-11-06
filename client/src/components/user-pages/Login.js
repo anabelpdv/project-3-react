@@ -15,7 +15,7 @@ export default class Login extends React.Component {
     }
 
     genericSync = (e) => {
-      const {  name, value } = e.target;
+      const { name, value } = e.target;
       this.setState({ [name]: value });
     }
 
@@ -36,7 +36,6 @@ export default class Login extends React.Component {
 
     render() {
       const { fullName, email, password } = this.state;
-      console.log("user in login: ", this.props.currentUser)
       if(this.props.currentUser){
         return <Redirect to='/' />
       }

@@ -6,9 +6,11 @@ export default class LocationDetails extends React.Component {
   }
 
 
+  getLocation
+
   render() {
     console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-    console.log('this are the props you are looking for: ',this.props)
+    console.log('this are the props you are looking for: ',this.props.match.params.id)
     return (
       <div className="location-details-container">
         <h1>Details page</h1>

@@ -52,13 +52,9 @@ export default class Map extends Component {
           <h6>{location.title}</h6>
           <h1>{location._id}</h1>
           <img className="image-infoWindow" src={location.imageUrl[0]}/>
-          {/* <BrowserRouter> 
-            {/* <Link  to={{
-              pathname: "/details",
-              state: { theLocation: true }
-              }}>Details</Link> */}
-              {/* <Link to={`/${location._id}`}>Details </Link>
-          </BrowserRouter> */} 
+          <BrowserRouter>
+              <Link to={`/details/${location._id}`}>Details </Link>
+          </BrowserRouter> 
         </div>
       )
     }

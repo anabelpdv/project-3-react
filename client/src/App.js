@@ -21,7 +21,7 @@ class App extends React.Component{
   }
 
   componentDidMount(){
-    // this.requestUserToDB();
+    this.requestUserToDB();
     axios.get("http://localhost:5000/api/checkuser", { withCredentials: true })
     .then(response => {
       const { userDoc } = response.data;
@@ -34,22 +34,22 @@ class App extends React.Component{
         })
   }
 
-  // requestUserToDB(){
-  //   axios.get("http://localhost:5000/api/checkuser", { withCredentials: true })
-  //       .then(response => {
-  //         const { userDoc } = response.data;
-  //         this.syncCurrentUSer(userDoc);
-  //         console.log('check user in app: ', userDoc)
-  //       })
-  //       .catch(err=>{
-  //         console.log("Err while getting the user from the checkuser route: ", err)
-  //       })
-  // }
+  requestUserToDB(){
+    axios.get("http://localhost:5000/api/checkuser", { withCredentials: true })
+        .then(response => {
+          const { userDoc } = response.data;
+          this.syncCurrentUSer(userDoc);
+          console.log('Check user in app: ', userDoc)
+        })
+        .catch(err=>{
+          console.log("Err while getting the user from the checkuser route: ", err)
+        })
+  }
 
   logout=()=>{
     axios.delete('http://localhost:5000/api/logout',{})
           .then(response=>{
-            console.log(response.data)
+            console.log('This is the data for user###########################',response.data)
             this.setState({
               currentUser:null,
             })
@@ -61,7 +61,6 @@ class App extends React.Component{
   }
 
   syncCurrentUSer(user){
-    console.log('is this triggered: ', user)
     this.setState({ currentUser: user })
   }
 
@@ -89,7 +88,7 @@ class App extends React.Component{
               onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  
               /> 
             } /> 
-            <Route exact path="/details" render={(props)=>
+            <Route exact path="/details/:id" render={(props)=>
             <  LocationDetails {...props}/>
             }  /> 
         </Switch>
