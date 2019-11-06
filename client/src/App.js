@@ -1,11 +1,10 @@
 import React from 'react';
 import './App.css';
 import axios from "axios";
-import { Switch, Route, NavLink } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Signup from "./components/user-pages/Signup";
 import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
-import Map from "./components/Map";
 import Navbar from './components/Navbar'
 import LocationDetails from './components/LocationDetails'
 import Sidebar from './components/Sidebar'
@@ -13,30 +12,40 @@ import Sidebar from './components/Sidebar'
 
 
 class App extends React.Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       currentUser: null,
+      allLocations:[],
+      visibleLocations:[],
+      ready: false,
     }
   }
 
   componentDidMount(){
-    this.requestUserToDB();
-    axios.get("http://localhost:5000/api/checkuser", { withCredentials: true })
-    .then(response => {
-      const { userDoc } = response.data;
-      this.syncCurrentUSer(userDoc);
-      console.log('check user in app: ', userDoc)
-    })
-    .catch(err=>{
-      console.log("hellooooooooooo")
-          console.log("Err while getting the user from the checkuser route: ", err)
-        })
+    this.getAllLocations()
+    this.requestUserToDB(); 
   }
+
+
+  getAllLocations=()=>{
+    axios.get("http://localhost:5000/api/locations")
+            .then(response=>{
+                this.setState({
+                    allLocations: response.data,
+                    visibleLocations: response.data,
+                    ready:true,
+                })
+            })
+            .catch(err=>{
+            console.log(err)
+            })
+}
 
   requestUserToDB(){
     axios.get("http://localhost:5000/api/checkuser", { withCredentials: true })
         .then(response => {
+          console.log('Im getting user')
           const { userDoc } = response.data;
           this.syncCurrentUSer(userDoc);
           console.log('Check user in app: ', userDoc)
@@ -47,13 +56,13 @@ class App extends React.Component{
   }
 
   logout=()=>{
-    axios.delete('http://localhost:5000/api/logout',{})
+    axios.post('http://localhost:5000/api/logout',{})
           .then(response=>{
             console.log('This is the data for user###########################',response.data)
             this.setState({
-              currentUser:null,
+              currentUser:response.userDoc,
             })
-
+            this.props.history.push(`/login`)
           }) 
           .catch(err=>{
             console.log(err);
@@ -65,6 +74,7 @@ class App extends React.Component{
   }
 
   render(){
+    
     return (
       <div>
         <Navbar 
@@ -74,22 +84,29 @@ class App extends React.Component{
         <Sidebar>
         </Sidebar>
         <Switch>
-            <Route exact path="/" render={ ()=><Home/> }   /> 
+            <Route exact path="/" render={ ()=>< Home
+                visibleLocations={this.state.visibleLocations}
+                ready={this.state.ready}
+                getAllLocations={this.getAllLocations}
+            /> }   /> 
+
             <Route exact path="/signup-page" render = { () => 
                 <Signup 
                   currentUser = { this.state.currentUser }   
                   onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }   
                 /> 
             }/>
+
             <Route exact path="/login" render={ (props)=> 
-              <Login 
-              {...props} 
-              currentUser = { this.state.currentUser }   
-              onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  
-              /> 
+                <Login 
+                  {...props} 
+                  currentUser = { this.state.currentUser }   
+                  onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  
+                /> 
             } /> 
+
             <Route exact path="/details/:id" render={(props)=>
-            <  LocationDetails {...props}/>
+                < LocationDetails {...props}/>
             }  /> 
         </Switch>
       </div>

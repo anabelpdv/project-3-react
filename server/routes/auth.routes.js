@@ -48,6 +48,7 @@ authRouter.post("/api/signup", (req,res,next)=>{
 
 
 authRouter.post('/api/login', (req,res,next)=>{
+  console.log('$$$$$$$$$$$$$$$$$$$$$$Hey Im login')
   passport.authenticate('local', (err, userDoc, failureDetails) => {
     if(err){
       res.status(500).json({ message:'Something went wrong with log in.' });
@@ -68,12 +69,8 @@ authRouter.post('/api/login', (req,res,next)=>{
 });
 
 
-authRouter.delete('/api/logout', (req,res,next)=>{
-  req.logout();
-  res.json({ userDoc: null });
-})
-
 authRouter.get('/api/checkuser', (req,res,next)=>{
+  console.log('From check user',req.user)
   if(req.user){
     req.user.encryptedPassword = undefined;
     res.status(200).json({ userDoc: req.user })
@@ -81,5 +78,20 @@ authRouter.get('/api/checkuser', (req,res,next)=>{
     res.status(401).json({ userDoc: null })
   }
 });
+
+
+authRouter.post('/api/logout', (req,res,next)=>{
+
+  console.log('################################## log out', req.user)
+req.logout();
+  req.session.destroy(function (err) {
+    res.clearCookie('connect.sid');
+    res.json({ userDoc: null });  
+  });
+ // req.logout();
+  
+})
+
+
 
 module.exports = authRouter;

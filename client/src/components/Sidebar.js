@@ -1,10 +1,9 @@
 import React from 'react'
-import { NavLink } from "react-router-dom";
-import { BrowserRouter, Link } from "react-router-dom";
+
 export default class Sidebar extends React.Component {
-  constructor(props){
-    super(props)
-  }
+  // constructor(props){
+  //   super(props)
+  // }
   render() {
     return (
       <div className="sidebar-container">

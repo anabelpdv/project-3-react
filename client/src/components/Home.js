@@ -14,10 +14,9 @@ export default class Home extends React.Component {
         super(props);
         this.state={
             map:{},
-            allLocations:[],
-            visibleLocations:[],
+            // allLocations:[],
+            // visibleLocations:[],
             markers: [],
-            ready: false,
             title:'',
             description:'',
             lat:'',
@@ -28,9 +27,9 @@ export default class Home extends React.Component {
         }
     }
 
-    componentDidMount(){
-        this.getAllLocations();
-    }
+    // // componentDidMount(){
+    // //     this.getAllLocations();
+    // // }
 
     addLocationToggle=()=>{
         this.setState({
@@ -43,7 +42,6 @@ export default class Home extends React.Component {
         })
     }
     detailsToggle=()=>{
-        console.log('Anabellllllllllllllllllllllll')
         this.setState({
             details:!this.state.details,
         })
@@ -58,7 +56,6 @@ export default class Home extends React.Component {
                         inputHandler={this.inputHandler} 
                         fileUploadHandler={this.fileUploadHandler}
                         formHandler={this.formHandler} 
-                        getAllLocations={this.getAllLocations} 
                         title={this.state.title} 
                         description={this.state.description}
                         lat={this.state.lat} 
@@ -112,7 +109,7 @@ export default class Home extends React.Component {
         
         axios.post('http://localhost:5000/api/locations',uploadData)
                 .then(response=>{
-                    this.getAllLocations();
+                    this.props.getAllLocations();
                     this.setState({
                         title:'',
                         description:'',
@@ -127,27 +124,15 @@ export default class Home extends React.Component {
                 })
     }
 
-    getAllLocations=()=>{
-        axios.get("http://localhost:5000/api/locations")
-                .then(response=>{
-                    this.setState({
-                        allLocations: response.data,
-                        visibleLocations: response.data,
-                        ready:true,
-                    })
-                })
-                .catch(err=>{
-                console.log(err)
-                })
-    }
+
 
     render(){
-        console.log('rendering home component')
+        
         return (
             <section>
-                {this.state.ready &&
+                {this.props.ready &&
                                         <Map 
-                                            allLocations={this.state.allLocations}
+                                            visibleLocations={this.props.visibleLocations}
                                             inputCoordinatesHandle={this.inputCoordinatesHandle}
                                             addLocationToggle={this.addLocationToggle}
                                             detailsToggle={this.detailsToggle}

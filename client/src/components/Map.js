@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import mapStyle from '../mapStyles';
 import { BrowserRouter, Link } from "react-router-dom";
 import ReactDOMServer from "react-dom/server";
-import LocationDetails from './LocationDetails'
+
 
 
 export default class Map extends Component {
@@ -21,7 +21,7 @@ export default class Map extends Component {
   }
 
   componentDidUpdate(prevprops, prevstate){
-    if(prevprops.allLocations.length !== this.props.allLocations.length){
+    if(prevprops.visibleLocations.length !== this.props.visibleLocations.length){
       this.addMarker();
     }
   }
@@ -51,7 +51,7 @@ export default class Map extends Component {
         <div className="container-infoWindow">
           <h6>{location.title}</h6>
           <h1>{location._id}</h1>
-          <img className="image-infoWindow" src={location.imageUrl[0]}/>
+          <img className="image-infoWindow" alt="" src={location.imageUrl[0]}/>
           <BrowserRouter>
               <Link to={`/details/${location._id}`}>Details </Link>
           </BrowserRouter> 
@@ -60,9 +60,9 @@ export default class Map extends Component {
     }
 
   addMarker = () => {
-    for(let locations = 0; locations < this.props.allLocations.length; locations++){
-        const lat = this.props.allLocations[locations].lat;
-        const lng = this.props.allLocations[locations].lng;
+    for(let locations = 0; locations < this.props.visibleLocations.length; locations++){
+        const lat = this.props.visibleLocations[locations].lat;
+        const lng = this.props.visibleLocations[locations].lng;
         
         let marker = new window.google.maps.Marker({
           position: {lat: lat, lng: lng},
@@ -74,7 +74,7 @@ export default class Map extends Component {
         });
 
         marker.addListener('click', ()=>{
-          const content = ReactDOMServer.renderToString(this.InfoWindowContent(this.props.allLocations[locations]));
+          const content = ReactDOMServer.renderToString(this.InfoWindowContent(this.props.visibleLocations[locations]));
       
           infowindow.setContent(content);
           infowindow.open(this.map, marker);
@@ -93,7 +93,7 @@ export default class Map extends Component {
   initMap = () =>  {
 
 
-    var myLatlng = {lat:25.7617,lng:-80.1918}
+    //var myLatlng = {lat:25.7617,lng:-80.1918}
   
       let map = new window.google.maps.Map(document.getElementById('map'),{styles: mapStyle,disableDoubleClickZoom: true });
 

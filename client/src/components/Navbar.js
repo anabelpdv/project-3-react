@@ -18,7 +18,7 @@ export default class Navbar extends React.Component {
                   <NavLink className="navbar-link" to="/login"> Login </NavLink>
                 </div>
               )
-               }
+              }
             </nav>
         </header>
       </div>
