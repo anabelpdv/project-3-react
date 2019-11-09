@@ -58,7 +58,7 @@ class App extends React.Component{
   }
 
   logout=()=>{
-    axios.post(`${process.env.REACT_APP_API_URL}/logout`,{})
+    axios.post(`${process.env.REACT_APP_API_URL}/logout`,{}, { withCredentials: true })
           .then(response=>{
             console.log('This is the data for user###########################',response.data)
             this.setState({
