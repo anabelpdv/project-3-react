@@ -57,6 +57,9 @@ app.use('/', require('./routes/location.routes'))
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/auth.routes'))
 
-
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 module.exports = app;
