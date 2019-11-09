@@ -25,6 +25,11 @@
   height: 100vh;
 }
 
+.newMap{
+  width:100vw;
+  height:100vh;
+}
+
 .btn{
   background-color: rgb(0,0,0,0);
   border-radius:30px;
