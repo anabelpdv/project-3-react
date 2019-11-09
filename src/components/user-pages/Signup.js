@@ -24,7 +24,7 @@ export default class Signup extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/signup', this.state, {withCredentials: true})
+    axios.post(`${process.env.REACT_APP_API_URL}/signup`, this.state, {withCredentials: true})
           .then(response =>{
             const { userDoc } = response.data;
             this.props.onUserChange(userDoc);

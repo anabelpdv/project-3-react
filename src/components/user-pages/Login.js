@@ -21,7 +21,7 @@ export default class Login extends React.Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
-      axios.post('http://localhost:5000/api/login', this.state, { withCredentials : true })
+      axios.post(`${process.env.REACT_APP_API_URL}`, this.state, { withCredentials : true })
             .then(response=>{
               const { userDoc } = response.data;
               console.log("user login: ", userDoc)
