@@ -18,6 +18,8 @@ class App extends React.Component{
       currentUser: null,
       allLocations:[],
       visibleLocations:[],
+      latitude:'',
+      longitude:'',
       ready: false,
     }
   }
@@ -25,6 +27,7 @@ class App extends React.Component{
   componentDidMount(){
     this.getAllLocations()
     this.requestUserToDB(); 
+    this.getCurrentCoordinates();
   }
 
   getAllLocations=()=>{
@@ -72,7 +75,25 @@ class App extends React.Component{
     this.setState({ currentUser: user })
   }
 
+  getCurrentCoordinates = () =>{
+      navigator.geolocation.getCurrentPosition((position)=>{
+        this.setState({
+          latitude:position.coords.latitude,
+          longitude:position.coords.longitude,
+        })
+    
+  },(positionError)=>{
+
+  })
+  }
+
+  
+
+
   render(){
+
+    console.log('This is lat:',this.state.latitude)
+    console.log('This is lng:',this.state.longitude)
     
     return (
       <div>
@@ -112,9 +133,11 @@ class App extends React.Component{
                 />
             }  /> 
 
-            <Route exact path="/newMap" render={ ()=>
+            <Route exact path="/newMap" render={ (props)=>
             <div  className="newMap">
-              <MapWrapped
+              <MapWrapped 
+                latitude={this.state.latitude}
+                longitude={this.state.longitude}
                 googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
                   process.env.REACT_APP_GOOGLE_KEY
                 }`}

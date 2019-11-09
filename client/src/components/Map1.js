@@ -9,26 +9,36 @@ import {
 import mapStyles from "../mapStyles";
 
 
-function Map() {
+function Map(props) {
 
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
+  const [currentLat, setCurrentLat] = useState(0);
+  const [currentLng, setcurrentLng] = useState(0);
 
   let pos = null;
   navigator.geolocation.getCurrentPosition((position)=>{
-    setLat(position.coords.latitude)
-    setLng(position.coords.longitude)
-  })
+    setCurrentLat(position.coords.latitude)
+    setcurrentLng(position.coords.longitude)
+  },(positionError)=>{
 
-console.log('This is my hook',lat)
-console.log('This is my hook',lng)
+})
+
+console.log('This are my props',props.latitude)
+console.log('This are my props',props.longitude)
+
   return (
     <GoogleMap
       defaultZoom={10}
-      defaultCenter={{ lat: 45.4211, lng: -75.6903 }}
+      defaultCenter={{ lat: props.latitude, lng: props.longitude}}
       defaultOptions={{ styles: mapStyles, disableDoubleClickZoom: true }}
       onDblClick={(e)=>console.log('This is the event', e.latLng.lat())}
     >
+
+      <Marker
+        position={{
+          lat:25,
+          lng:-80,
+        }}
+      />
     </GoogleMap>
   );
 }
