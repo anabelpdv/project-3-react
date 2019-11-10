@@ -60,7 +60,6 @@ class App extends React.Component{
   logout=()=>{
     axios.post(`${process.env.REACT_APP_API_URL}/logout`,{}, { withCredentials: true })
           .then(response=>{
-            console.log('This is the data for user###########################',response.data)
             this.setState({
               currentUser:response.userDoc,
             })
@@ -83,7 +82,10 @@ class App extends React.Component{
         })
     
   },(positionError)=>{
-
+    this.setState({
+      latitude:35.5951,
+      longitude:82.5515,
+    })
   })
   }
 
@@ -91,9 +93,6 @@ class App extends React.Component{
 
 
   render(){
-
-    console.log('This is lat:',this.state.latitude)
-    console.log('This is lng:',this.state.longitude)
     
     return (
       <div>
