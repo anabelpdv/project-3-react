@@ -27,6 +27,7 @@ export default class Home extends React.Component {
 
 
     addLocationToggle=()=>{
+        console.log('Anabel ooooo')
         this.setState({
             addLocation:!this.state.addLocation,
             title:'',
@@ -80,6 +81,7 @@ export default class Home extends React.Component {
     }
 
     inputCoordinatesHandle=(e)=>{
+        console.log( e.latLng.lat())
         this.setState({
             lat: e.latLng.lat(),
             lng:e.latLng.lng()
@@ -122,36 +124,28 @@ export default class Home extends React.Component {
         
         return (
             <div>
+                {this.props.ready &&
+                            <div className="newMap">
+                                <MapWrapped 
+                                inputCoordinatesHandle={this.inputCoordinatesHandle}
+                                addLocationToggle={this.addLocationToggle}
+                                visibleLocations={this.props.visibleLocations}
+                                latitude={this.props.latitude}
+                                longitude={this.props.longitude}
+                                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
+                                    process.env.REACT_APP_GOOGLE_KEY
+                                }`}
+                                loadingElement={<div style={{ height: `100%` }} />}
+                                containerElement={<div style={{ height: `100%` }} />}
+                                mapElement={<div style={{ height: `100%` }} />}
+                            />
+                            </div>
+                    }
 
-
-            <div className="newMap">
-                <MapWrapped 
-                visibleLocations={this.props.visibleLocations}
-                latitude={this.props.latitude}
-                longitude={this.props.longitude}
-                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
-                    process.env.REACT_APP_GOOGLE_KEY
-                }`}
-                loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `100%` }} />}
-                mapElement={<div style={{ height: `100%` }} />}
-            />
-            </div>
-                {/* {this.props.ready &&
-                                        <Map 
-                                            visibleLocations={this.props.visibleLocations}
-                                            inputCoordinatesHandle={this.inputCoordinatesHandle}
-                                            addLocationToggle={this.addLocationToggle}
-                                            detailsToggle={this.detailsToggle}
-                                            
-                                        />
-                }
-                
-                {this.addLocationRender()} */}
+                {this.addLocationRender()} 
 
                 <Sidebar 
                     addLocationToggle={this.addLocationToggle}
-                    
                     >
                 </Sidebar>
             </div>

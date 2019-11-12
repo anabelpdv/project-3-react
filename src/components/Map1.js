@@ -11,26 +11,16 @@ import mapStyles from "../mapStyles";
 
 function Map(props) {
 
-  const [currentLat, setCurrentLat] = useState(0);
-  const [currentLng, setcurrentLng] = useState(0);
-
-  let pos = null;
-  navigator.geolocation.getCurrentPosition((position)=>{
-    setCurrentLat(position.coords.latitude)
-    setcurrentLng(position.coords.longitude)
-  },(positionError)=>{
-
-})
-
-console.log('This are my props',props.visibleLocations)
-
+  const [currentLocation, setCurrentLocation] = useState(null);
 
   return (
     <GoogleMap
       defaultZoom={10}
       defaultCenter={{ lat: props.latitude, lng: props.longitude}}
       defaultOptions={{ styles: mapStyles, disableDoubleClickZoom: true }}
-      onDblClick={(e)=>console.log('This is the event', e.latLng.lat())}
+      onDblClick={(e)=>{
+        props.inputCoordinatesHandle(e);
+        props.addLocationToggle()}}
     >
     {props.visibleLocations.map(location=>(
     <Marker 
@@ -38,8 +28,26 @@ console.log('This are my props',props.visibleLocations)
       position = {{ 
         lat: location.lat,
         lng: location.lng }}
+        onClick={()=>{
+          setCurrentLocation(location);
+        }}
     /> 
     ))}
+      {currentLocation && (
+      <InfoWindow
+        position = {{ 
+          lat: currentLocation.lat,
+          lng: currentLocation.lng }}
+          onCloseClick={()=>{
+            setCurrentLocation(null);
+        }}
+        >
+        <div>
+          <h1>{currentLocation.title}</h1>
+          <button onClick={()=>console.log('Finally you have a react componen in infowindow')}>Details</button>
+        </div>
+        </InfoWindow>
+    )} 
     </GoogleMap>
   );
 }
