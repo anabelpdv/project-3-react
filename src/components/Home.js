@@ -1,9 +1,8 @@
 import React from "react";
 import axios from 'axios'
 import AddLocation from "./AddLocation";
-import Map from "./Map";
 import Sidebar from "./Sidebar";
-import MapWrapped from './Map1'
+import MapWrapped from './Map'
 import LocationDetails from './LocationDetails'
 
 
@@ -19,8 +18,9 @@ export default class Home extends React.Component {
             lat:'',
             lng:'',
             imageUrl:[],
+            currentLocation:'',
             addLocation:false,
-            details:true,
+            details:false,
         }
     }
 
@@ -41,6 +41,11 @@ export default class Home extends React.Component {
         })
     }
 
+    currentLocationDetails=(currentLocation)=>{
+        this.setState({
+            currentLocation:currentLocation,
+        })
+    }
 
     addLocationRender=()=>{
         if(this.state.addLocation){
@@ -116,12 +121,12 @@ export default class Home extends React.Component {
 
 
     render(){
-        
         return (
             <div>
                 {this.props.ready &&
                             <div className="newMap">
                                 <MapWrapped 
+                                currentLocationDetails={this.currentLocationDetails}
                                 detailsToggle={this.detailsToggle}
                                 renderLocationDetails={this.renderLocationDetails}
                                 inputCoordinatesHandle={this.inputCoordinatesHandle}
@@ -143,7 +148,9 @@ export default class Home extends React.Component {
 
                 {this.state.details && 
                     <LocationDetails
+                    currentLocation={this.state.currentLocation}
                     detailsToggle={this.detailsToggle}
+                    visibleLocations={this.props.visibleLocations}
                     />
                 
                 }   
