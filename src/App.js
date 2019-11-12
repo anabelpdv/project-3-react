@@ -89,8 +89,6 @@ class App extends React.Component{
   })
   }
 
-  
-
 
   render(){
     
@@ -107,6 +105,8 @@ class App extends React.Component{
                 visibleLocations={this.state.visibleLocations}
                 ready={this.state.ready}
                 getAllLocations={this.getAllLocations}
+                latitude={this.state.latitude}
+                longitude={this.state.longitude}
             /> }   /> 
 
             <Route exact path="/signup-page" render = { () => 

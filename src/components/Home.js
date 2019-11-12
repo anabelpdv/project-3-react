@@ -3,7 +3,7 @@ import axios from 'axios'
 import AddLocation from "./AddLocation";
 import Map from "./Map";
 import Sidebar from "./Sidebar";
-import LocationDetails from "./LocationDetails";
+import MapWrapped from './Map1'
 
 
 
@@ -121,8 +121,23 @@ export default class Home extends React.Component {
     render(){
         
         return (
-            <section>
-                {this.props.ready &&
+            <div>
+
+
+            <div className="newMap">
+                <MapWrapped 
+                visibleLocations={this.props.visibleLocations}
+                latitude={this.props.latitude}
+                longitude={this.props.longitude}
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
+                    process.env.REACT_APP_GOOGLE_KEY
+                }`}
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: `100%` }} />}
+                mapElement={<div style={{ height: `100%` }} />}
+            />
+            </div>
+                {/* {this.props.ready &&
                                         <Map 
                                             visibleLocations={this.props.visibleLocations}
                                             inputCoordinatesHandle={this.inputCoordinatesHandle}
@@ -132,14 +147,14 @@ export default class Home extends React.Component {
                                         />
                 }
                 
-                {this.addLocationRender()}
+                {this.addLocationRender()} */}
 
                 <Sidebar 
                     addLocationToggle={this.addLocationToggle}
                     
                     >
                 </Sidebar>
-            </section>
+            </div>
         )
     }
 }

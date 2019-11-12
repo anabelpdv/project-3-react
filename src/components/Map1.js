@@ -22,8 +22,8 @@ function Map(props) {
 
 })
 
-console.log('This are my props',props.latitude)
-console.log('This are my props',props.longitude)
+console.log('This are my props',props.visibleLocations)
+
 
   return (
     <GoogleMap
@@ -32,13 +32,14 @@ console.log('This are my props',props.longitude)
       defaultOptions={{ styles: mapStyles, disableDoubleClickZoom: true }}
       onDblClick={(e)=>console.log('This is the event', e.latLng.lat())}
     >
-
-      <Marker
-        position={{
-          lat:25,
-          lng:-80,
-        }}
-      />
+    {props.visibleLocations.map(location=>(
+    <Marker 
+      key={location._id}
+      position = {{ 
+        lat: location.lat,
+        lng: location.lng }}
+    /> 
+    ))}
     </GoogleMap>
   );
 }
