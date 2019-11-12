@@ -4,6 +4,7 @@ import AddLocation from "./AddLocation";
 import Map from "./Map";
 import Sidebar from "./Sidebar";
 import MapWrapped from './Map1'
+import LocationDetails from './LocationDetails'
 
 
 
@@ -13,21 +14,17 @@ export default class Home extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            map:{},
-            markers: [],
             title:'',
             description:'',
             lat:'',
             lng:'',
             imageUrl:[],
             addLocation:false,
-            details:false,
+            details:true,
         }
     }
 
-
     addLocationToggle=()=>{
-        console.log('Anabel ooooo')
         this.setState({
             addLocation:!this.state.addLocation,
             title:'',
@@ -37,6 +34,7 @@ export default class Home extends React.Component {
             imageUrl:[],
         })
     }
+
     detailsToggle=()=>{
         this.setState({
             details:!this.state.details,
@@ -67,7 +65,6 @@ export default class Home extends React.Component {
     inputHandler=(e)=>{
         const name = e.target.name;
         const value = e.target.value;
-
         this.setState({
             [name]: value,
         })
@@ -81,7 +78,6 @@ export default class Home extends React.Component {
     }
 
     inputCoordinatesHandle=(e)=>{
-        console.log( e.latLng.lat())
         this.setState({
             lat: e.latLng.lat(),
             lng:e.latLng.lng()
@@ -119,7 +115,6 @@ export default class Home extends React.Component {
     }
 
 
-
     render(){
         
         return (
@@ -127,6 +122,8 @@ export default class Home extends React.Component {
                 {this.props.ready &&
                             <div className="newMap">
                                 <MapWrapped 
+                                detailsToggle={this.detailsToggle}
+                                renderLocationDetails={this.renderLocationDetails}
                                 inputCoordinatesHandle={this.inputCoordinatesHandle}
                                 addLocationToggle={this.addLocationToggle}
                                 visibleLocations={this.props.visibleLocations}
@@ -144,12 +141,18 @@ export default class Home extends React.Component {
 
                 {this.addLocationRender()} 
 
+                {this.state.details && 
+                    <LocationDetails
+                    detailsToggle={this.detailsToggle}
+                    />
+                
+                }   
+
                 <Sidebar 
                     addLocationToggle={this.addLocationToggle}
-                    >
+                    >   
                 </Sidebar>
             </div>
         )
     }
 }
-

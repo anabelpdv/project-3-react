@@ -8,7 +8,6 @@ import {
 } from "react-google-maps";
 import mapStyles from "../mapStyles";
 
-
 function Map(props) {
 
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -19,8 +18,9 @@ function Map(props) {
       defaultCenter={{ lat: props.latitude, lng: props.longitude}}
       defaultOptions={{ styles: mapStyles, disableDoubleClickZoom: true }}
       onDblClick={(e)=>{
+        props.addLocationToggle()
         props.inputCoordinatesHandle(e);
-        props.addLocationToggle()}}
+      }}
     >
     {props.visibleLocations.map(location=>(
     <Marker 
@@ -44,7 +44,9 @@ function Map(props) {
         >
         <div>
           <h1>{currentLocation.title}</h1>
-          <button onClick={()=>console.log('Finally you have a react componen in infowindow')}>Details</button>
+          <button onClick={()=>{
+            props.detailsToggle()
+          }}>Details</button>
         </div>
         </InfoWindow>
     )} 

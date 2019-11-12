@@ -7,10 +7,14 @@ export default class LocationDetails extends React.Component {
 
 
   renderLocationDetails=()=>{
-    const location= this.props.visibleLocations.find(location => location._id === this.props.match.params.id);
+    // const location= this.props.visibleLocations.find(location => location._id === this.props.match.params.id);
     return(
       <div>
-          <h1>{location.title}</h1>
+        <button onClick={()=>{
+          this.props.detailsToggle()
+        }}>Close</button>
+        <h1>Location details component</h1>
+          {/* <h1>{location.title}</h1>
           <h4>{location.description}</h4>
           <div className="gallery" id="gallery">
             {location.imageUrl.map(image =>{
@@ -21,8 +25,9 @@ export default class LocationDetails extends React.Component {
                 
               )
             })
-            }
-          </div> 
+            } 
+          </div> */}
+          
       </div>
       
     )
@@ -32,14 +37,14 @@ export default class LocationDetails extends React.Component {
   //console.log('Location details is rendered')
     return (
       <div className="details-background">
-        {this.props.ready &&
+        {/* {this.props.ready &&
                           
                           <div className="location-details-container">
-                            <h1>Location details</h1>
+                            <h1>Location details</h1> */}
                             {this.renderLocationDetails()}
                             </div>               
-                }
-      </div>
+      //           }
+      // </div>
     )
   }
 }
