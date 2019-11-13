@@ -17,9 +17,10 @@ class App extends React.Component{
       currentUser: null,
       allLocations:[],
       visibleLocations:[],
-      latitude:'',
-      longitude:'',
+      latitude:25.4,
+      longitude:-80.555,
       ready: false,
+      coordinatesReady: false,
     }
   }
 
@@ -78,15 +79,10 @@ class App extends React.Component{
         this.setState({
           latitude:position.coords.latitude,
           longitude:position.coords.longitude,
+          coordinatesReady:true,
         })
     
-  },(positionError)=>{
-    this.setState({
-      latitude:35.5951,
-      longitude:82.5515,
-    })
-  })
-  }
+  })}
 
 
   render(){
@@ -100,6 +96,7 @@ class App extends React.Component{
         </Sidebar>
         <Switch>
             <Route exact path="/" render={ ()=>< Home
+                coordinatesReady={this.state.coordinatesReady}
                 visibleLocations={this.state.visibleLocations}
                 ready={this.state.ready}
                 getAllLocations={this.getAllLocations}

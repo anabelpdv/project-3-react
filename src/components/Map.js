@@ -12,6 +12,7 @@ function Map(props) {
 
   const [currentLocation, setCurrentLocation] = useState(null);
 
+  console.log('Props in map: ', props)
   return (
     <GoogleMap
       defaultZoom={10}

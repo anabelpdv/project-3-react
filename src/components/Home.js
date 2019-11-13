@@ -123,7 +123,7 @@ export default class Home extends React.Component {
     render(){
         return (
             <div>
-                {this.props.ready &&
+                {(this.props.ready && this.props.coordinatesReady) &&
                             <div className="newMap">
                                 <MapWrapped 
                                 currentLocationDetails={this.currentLocationDetails}
