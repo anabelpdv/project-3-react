@@ -8,7 +8,6 @@ import Login from "./components/user-pages/Login";
 import Navbar from './components/Navbar'
 import LocationDetails from './components/LocationDetails'
 import Sidebar from './components/Sidebar'
-import MapWrapped from './components/Map'
 
 
 class App extends React.Component{
@@ -91,7 +90,6 @@ class App extends React.Component{
 
 
   render(){
-    
     return (
       <div>
         <Navbar 
@@ -124,13 +122,6 @@ class App extends React.Component{
                 /> 
             } /> 
 
-            <Route exact path="/details/:id" render={(props)=>
-                < LocationDetails 
-                {...props}
-                visibleLocations={this.state.visibleLocations}
-                ready={this.state.ready}
-                />
-            }  /> 
         </Switch>
       </div>
     );
