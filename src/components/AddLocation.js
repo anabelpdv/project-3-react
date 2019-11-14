@@ -10,8 +10,7 @@ export default class AddLocation extends React.Component {
 
 
   render() {
-    console.log('coordinates',this.props.lat)
-    console.log('coordinates',this.props.lng)
+
     return (
       <div className="add-location-form">
         <form onSubmit={(e) =>this.props.formHandler(e)}>
