@@ -14,7 +14,7 @@ export default class EditLocation extends React.Component {
 
       <div className="edit-location-form">
 
-       <h1>Edit Location</h1>
+      <h1>Edit Location</h1>
         <form onSubmit={(e) =>this.props.formHandler(e)}>
           <div>
               <p>Title</p>

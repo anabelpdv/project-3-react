@@ -62,7 +62,7 @@ export default class Home extends React.Component {
                     <AddLocation 
                         inputHandler={this.inputHandler} 
                         fileUploadHandler={this.fileUploadHandler}
-                        formHandler={this.formHandler} 
+                        addFormHandler={this.addFormHandler} 
                         title={this.state.title} 
                         description={this.state.description}
                         lat={this.state.lat} 
@@ -117,7 +117,7 @@ export default class Home extends React.Component {
         })
     }
 
-    formHandler=(e)=>{
+    addFormHandler=(e)=>{
         e.preventDefault()
         const uploadData = new FormData();
         uploadData.append('title', this.state.title);
