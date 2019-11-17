@@ -198,7 +198,7 @@
   top:12vh;
   height:88vh;
   min-width: 100px;
-  width:20vw;
+  width:10vw;
   text-align: center;
 }
 
@@ -211,8 +211,8 @@
 }
 
 .profile-image-container{
-  height:110px;
-  width:110px;
+  height:90px;
+  width:90px;
   border-radius: 50%;
   border:solid #D2C2A2 1px;
   margin:0 auto;
