@@ -13,7 +13,7 @@ export default class AddLocation extends React.Component {
 
     return (
       <div className="add-location-form">
-        <form onSubmit={(e) =>this.props.addFormHandler(e)}>
+        <form onSubmit={(e) =>this.props.s(e)}>
           <div>
               <p>Title</p>
               <input className="input-element" onChange={this.props.inputHandler} type="text" name="title" value={this.props.title}/>
