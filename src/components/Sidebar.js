@@ -1,9 +1,10 @@
 import React from 'react'
+import { NavLink } from "react-router-dom";
 
 export default class Sidebar extends React.Component {
-  // constructor(props){
-  //   super(props)
-  // }
+  constructor(props){
+    super(props)
+  }
   render() {
     return (
       <div className="sidebar-container">
@@ -24,7 +25,24 @@ export default class Sidebar extends React.Component {
         <div className="sidebar-element">
           <button>List All</button>
         </div>
+    {this.props.currentUser && <h1>{this.props.currentUser.fullName}</h1>}
+
+    {this.props.currentUser ? (
+                <div>
+                <NavLink className="" to="/">U-Xer</NavLink>
+                <button className=""  onClick={this.props.logout}>Logout</button>  
+              </div>
+              ) : (
+                <div>
+                  <NavLink className="" to="/signup-page"> Signup </NavLink>
+                  <NavLink className="" to="/login"> Login </NavLink>
+                </div>
+              )
+              }
+
       </div>
+
+      
     )
   } 
 }

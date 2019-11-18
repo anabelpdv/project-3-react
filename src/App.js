@@ -19,7 +19,7 @@ class App extends React.Component{
       visibleLocations:[],
       latitude:25.4,
       longitude:-80.555,
-      ready: false,
+      locationsReady: false,
       coordinatesReady: false,
     }
   }
@@ -36,7 +36,7 @@ class App extends React.Component{
                 this.setState({
                     allLocations: response.data,
                     visibleLocations: response.data,
-                    ready:true,
+                    locationsReady:true,
                 })
             })
             .catch(err=>{
@@ -88,17 +88,15 @@ class App extends React.Component{
   render(){
     return (
       <div>
-        <Navbar 
-          currentUser = { this.state.currentUser }  
-          logout={this.logout}>
-        </Navbar>
-        <Sidebar>
-        </Sidebar>
+        
+
+
         <Switch>
             <Route exact path="/" render={ ()=>< Home
+                currentUser={this.state.currentUser}
                 coordinatesReady={this.state.coordinatesReady}
                 visibleLocations={this.state.visibleLocations}
-                ready={this.state.ready}
+                locationsReady={this.state.locationsReady}
                 getAllLocations={this.getAllLocations}
                 latitude={this.state.latitude}
                 longitude={this.state.longitude}
@@ -120,6 +118,11 @@ class App extends React.Component{
             } /> 
 
         </Switch>
+        <Sidebar 
+            logout={this.logout}
+            currentUser={this.state.currentUser}
+            >   
+        </Sidebar>
       </div>
     );
   }

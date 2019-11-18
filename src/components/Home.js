@@ -1,7 +1,6 @@
 import React from "react";
 import axios from 'axios'
 import AddLocation from "./AddLocation";
-import Sidebar from "./Sidebar";
 import MapWrapped from './Map'
 import LocationDetails from './LocationDetails'
 import EditLocation from './EditLocation'
@@ -151,7 +150,7 @@ export default class Home extends React.Component {
     render(){
         return (
             <div>
-                {(this.props.ready && this.props.coordinatesReady) &&
+                {(this.props.locationsReady && this.props.coordinatesReady) &&
                             <div className="newMap">
                                 <MapWrapped 
                                 currentLocationDetails={this.currentLocationDetails}
@@ -185,10 +184,7 @@ export default class Home extends React.Component {
                 }  
                 {this.editLocationRender()}
 
-                <Sidebar 
-                    addLocationToggle={this.addLocationToggle}
-                    >   
-                </Sidebar>
+                
             </div>
         )
     }
