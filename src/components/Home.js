@@ -153,7 +153,6 @@ export default class Home extends React.Component {
                 {(this.props.locationsReady && this.props.coordinatesReady) &&
                             <div className="newMap">
                                 <MapWrapped 
-                                currentLocationDetails={this.currentLocationDetails}
                                 detailsToggle={this.detailsToggle}
                                 inputCoordinatesHandle={this.inputCoordinatesHandle}
                                 addLocationToggle={this.addLocationToggle}

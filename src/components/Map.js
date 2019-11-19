@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import { NavLink } from "react-router-dom";
 import {
   withGoogleMap,
   withScriptjs,
@@ -45,6 +46,7 @@ function Map(props) {
         >
         <div>
           <h1>{currentLocation.title}</h1>
+          <NavLink to="/details"> Details</NavLink>
           <button onClick={()=>{
             props.currentLocationDetails(currentLocation)
             props.detailsToggle()

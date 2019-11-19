@@ -6,11 +6,11 @@ export default class LocationDetails extends React.Component {
   }
 
   render() {
-    console.log("this is the props. .. ... ", this.props);
-    const location = this.props.currentLocation;
+        console.log('Rendering Location details')
     return (
       <div className="location-details-container">
-        <button className="btn" onClick={this.props.detailsToggle}>Close</button>
+        <h1>Location Details</h1>
+        {/* <button className="btn" onClick={this.props.detailsToggle}>Close</button>
         <span onClick={()=>this.props.editLocationToggle()} className="edit-button"><i className="far fa-edit"></i></span>
         <h1>{location.title}</h1>
         <p>{location.description}</p>
@@ -19,8 +19,7 @@ export default class LocationDetails extends React.Component {
           <div key={i}>
             <img src={img} alt=""/>
           </div>
-        ))}
-        <h4></h4>
+        ))} */}
       </div>
     )
   }

@@ -117,6 +117,14 @@ class App extends React.Component{
                 /> 
             } /> 
 
+            <Route exact path="/details" render={ (props)=> 
+                <LocationDetails 
+                  {...props} 
+                  currentUser = { this.state.currentUser }   
+              
+                /> 
+            }/>
+
         </Switch>
         <Sidebar 
             logout={this.logout}
