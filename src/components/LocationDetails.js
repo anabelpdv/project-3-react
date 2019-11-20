@@ -96,21 +96,21 @@ export default class LocationDetails extends React.Component {
       return(
         <div className="location-details-container">
         <div>Location info
-          <h1>Location Details</h1>
-          <button className="btn" onClick={()=>console.log('Anabel')}>Close</button>
-          <button onClick={this.editLocationToggle} className="btn">Edit</button>
-          <h1>{this.state.title}</h1>
-          <p>{this.state.description}</p>
+            <h1>Location Details</h1>
+            <button className="btn" onClick={()=>console.log('Anabel')}>Close</button>
+            <button onClick={this.editLocationToggle} className="btn">Edit</button>
+            <h1>{this.state.title}</h1>
+            <p>{this.state.description}</p>
 
-          {this.state.imageUrl.map((img,i)=>(
-            <div key={i}>
-              <img src={img} alt=""/>
+            {this.state.imageUrl.map((img,i)=>(
+              <div key={i}>
+                <img src={img} alt=""/>
+              </div>
+            ))}
             </div>
-          ))}
-          </div>
-          <div>Comments</div>
-          {this.editLocationRender()}
-      </div>
+            <div>Comments</div>
+            {this.editLocationRender()}
+        </div>
       )
     }
   }

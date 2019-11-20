@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import axios from "axios";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import Signup from "./components/user-pages/Signup";
 import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
@@ -62,7 +62,7 @@ class App extends React.Component{
             this.setState({
               currentUser:response.userDoc,
             })
-            this.props.history.push(`/login`)
+            this.props.history.push("/login")
           }) 
           .catch(err=>{
             console.log(err);
@@ -141,4 +141,4 @@ class App extends React.Component{
   }
 }
 
-export default App;
+export default withRouter(App);
