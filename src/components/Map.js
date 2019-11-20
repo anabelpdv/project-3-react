@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   withGoogleMap,
   withScriptjs,
@@ -13,7 +13,6 @@ function Map(props) {
 
   const [currentLocation, setCurrentLocation] = useState(null);
 
-  console.log('Props in map: ', props)
   return (
     <GoogleMap
       defaultZoom={10}
@@ -46,9 +45,13 @@ function Map(props) {
         >
         <div>
           <h1>{currentLocation.title}</h1>
-          <NavLink to="/details"> Details</NavLink>
+          <Link to={{
+            pathname:'/details',
+            state:{
+              location: currentLocation,
+            }
+          }}> Details</Link>
           <button onClick={()=>{
-            props.currentLocationDetails(currentLocation)
             props.detailsToggle()
           }}>Details</button>
         </div>

@@ -3,7 +3,7 @@ import axios from 'axios'
 import AddLocation from "./AddLocation";
 import MapWrapped from './Map'
 import LocationDetails from './LocationDetails'
-import EditLocation from './EditLocation'
+
 
 
 
@@ -20,8 +20,6 @@ export default class Home extends React.Component {
             imageUrl:[],
             currentLocation:'',
             addLocation:false,
-            details:false,
-            editLocation:false,
         }
     }
 
@@ -39,12 +37,6 @@ export default class Home extends React.Component {
     editLocationToggle=()=>{
         this.setState({
             editLocation:!this.state.editLocation,
-        })
-    }
-
-    detailsToggle=()=>{
-        this.setState({
-            details:!this.state.details,
         })
     }
 
@@ -74,25 +66,7 @@ export default class Home extends React.Component {
         }     
     }
 
-    editLocationRender=()=>{
-        if(this.state.editLocation){
-            return(
-                <div>
-                    <EditLocation
-                        inputHandler={this.inputHandler} 
-                        fileUploadHandler={this.fileUploadHandler}
-                        formHandler={this.formHandler} 
-                        title={this.state.title} 
-                        description={this.state.description}
-                        lat={this.state.lat} 
-                        lng={this.state.lng}
-                        editLocationToggle={this.editLocationToggle}
-                        >
-                    </EditLocation>
-                </div>
-            )
-        }     
-    }
+
 
     inputHandler=(e)=>{
         const name = e.target.name;
@@ -148,6 +122,7 @@ export default class Home extends React.Component {
 
 
     render(){
+        console.log('hommeeee')
         return (
             <div>
                 {(this.props.locationsReady && this.props.coordinatesReady) &&
@@ -180,8 +155,7 @@ export default class Home extends React.Component {
                     visibleLocations={this.props.visibleLocations}
                     />
                 
-                }  
-                {this.editLocationRender()}
+                } 
 
                 
             </div>

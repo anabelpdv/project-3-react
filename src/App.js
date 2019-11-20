@@ -19,8 +19,8 @@ class App extends React.Component{
       visibleLocations:[],
       latitude:25.4,
       longitude:-80.555,
-      locationsReady: false,
-      coordinatesReady: false,
+      locationsReady: true,
+      coordinatesReady: true,
     }
   }
 
@@ -84,13 +84,17 @@ class App extends React.Component{
     
   })}
 
+  editLocationToggle=()=>{
+    this.setState({
+        editLocation:!this.state.editLocation,
+    })
+}
+
 
   render(){
     return (
       <div>
-        
-
-
+  
         <Switch>
             <Route exact path="/" render={ ()=>< Home
                 currentUser={this.state.currentUser}
@@ -120,6 +124,7 @@ class App extends React.Component{
             <Route exact path="/details" render={ (props)=> 
                 <LocationDetails 
                   {...props} 
+                  editLocationToggle={this.editLocationToggle}
                   currentUser = { this.state.currentUser }   
               
                 /> 

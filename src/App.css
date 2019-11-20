@@ -115,19 +115,15 @@
 .location-details-container{
   position:absolute;
   margin:0 auto;
-  width:90vw;
-  height:88vh;
-  top:12vh;
+  width:100vw;
+  height:100vh;
+  top:0;
   right:0;
   overflow: scroll;
   padding:10px 40px;
   text-align: center;
   background-color: rgb(0,0,0,0.76);
   color:#D2C2A2;
-}
-
-.edit-button{
-  font-size:2em;
 }
 
 .images-container{
