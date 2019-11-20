@@ -66,8 +66,6 @@ export default class Home extends React.Component {
         }     
     }
 
-
-
     inputHandler=(e)=>{
         const name = e.target.name;
         const value = e.target.value;
@@ -122,7 +120,7 @@ export default class Home extends React.Component {
 
 
     render(){
-        console.log('hommeeee')
+        console.log('Home props', this.props)
         return (
             <div>
                 {(this.props.locationsReady && this.props.coordinatesReady) &&
@@ -145,18 +143,6 @@ export default class Home extends React.Component {
                     }
 
                 {this.addLocationRender()} 
-                
-
-                {this.state.details && 
-                    <LocationDetails
-                    editLocationToggle={this.editLocationToggle}
-                    currentLocation={this.state.currentLocation}
-                    detailsToggle={this.detailsToggle}
-                    visibleLocations={this.props.visibleLocations}
-                    />
-                
-                } 
-
                 
             </div>
         )

@@ -5,7 +5,6 @@ import { Switch, Route } from "react-router-dom";
 import Signup from "./components/user-pages/Signup";
 import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
-import Navbar from './components/Navbar'
 import LocationDetails from './components/LocationDetails'
 import Sidebar from './components/Sidebar'
 
@@ -19,8 +18,8 @@ class App extends React.Component{
       visibleLocations:[],
       latitude:25.4,
       longitude:-80.555,
-      locationsReady: true,
-      coordinatesReady: true,
+      locationsReady: false,
+      coordinatesReady: false,
     }
   }
 
@@ -124,6 +123,7 @@ class App extends React.Component{
             <Route exact path="/details" render={ (props)=> 
                 <LocationDetails 
                   {...props} 
+                  getAllLocations={this.getAllLocations}
                   editLocationToggle={this.editLocationToggle}
                   currentUser = { this.state.currentUser }   
               
