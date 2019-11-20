@@ -45,15 +45,15 @@ function Map(props) {
         >
         <div>
           <h1>{currentLocation.title}</h1>
+          
           <Link to={{
             pathname:'/details',
             state:{
               location: currentLocation,
             }
-          }}> Details</Link>
-          <button onClick={()=>{
-            props.detailsToggle()
-          }}>Details</button>
+          }}> <button>  Details</button></Link>
+          
+        
         </div>
         </InfoWindow>
     )} 

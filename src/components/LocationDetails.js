@@ -1,5 +1,6 @@
 import React from 'react'
 import EditLocation from './EditLocation'
+import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios'
 
 export default class LocationDetails extends React.Component {
@@ -91,25 +92,50 @@ export default class LocationDetails extends React.Component {
       }     
   }
 
+  // renderCarousel=()=>{
+  //   return(
+  //     <Carousel>
+  //         {this.state.imageUrl.map((photo,i)=>{
+  //             return(
+                
+  //               <Carousel.Item>
+  //               <Carousel.Item>
+                
+  //             )
+  //         })}
+
+  //     </Carousel>
+  //   )
+  // }
+
   renderDetails=()=>{
     if(this.state.locationReady){
       return(
-        <div className="location-details-container">
-        <div>Location info
-            <h1>Location Details</h1>
-            <button className="btn" onClick={()=>console.log('Anabel')}>Close</button>
-            <button onClick={this.editLocationToggle} className="btn">Edit</button>
-            <h1>{this.state.title}</h1>
-            <p>{this.state.description}</p>
-
-            {this.state.imageUrl.map((img,i)=>(
-              <div key={i}>
-                <img src={img} alt=""/>
-              </div>
-            ))}
-            </div>
-            <div>Comments</div>
-            {this.editLocationRender()}
+        <div className="location-wrapper">
+          <div className="location-details-container">
+              <div className="details-box">
+                  <button className="btn" onClick={()=>this.props.history.push('/')}>Close</button>
+                  <button onClick={this.editLocationToggle} className="btn">Edit</button>
+                  <button onClick={()=>console.log('I do nothing')} className="btn">Comment</button>
+                  <Carousel>
+                      {this.state.imageUrl.map((photo,i)=>(
+                              <Carousel.Item>
+                              <img
+                                className="d-block w-100"
+                                src={photo}
+                                alt="First slide"
+                              />
+                            </Carousel.Item>
+                        ))}
+                  </Carousel>
+                  <h1>{this.state.title}</h1>
+                  <p>{this.state.description}</p>
+                </div>
+                <div className="comments-box">
+                  <h1>Comments here</h1>
+                </div>
+                {this.editLocationRender()}
+        </div>
         </div>
       )
     }
