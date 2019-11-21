@@ -2,8 +2,7 @@ import React from "react";
 import axios from 'axios'
 import AddLocation from "./AddLocation";
 import MapWrapped from './Map'
-import LocationDetails from './LocationDetails'
-
+import Sidebar from './Sidebar'
 
 
 
@@ -142,6 +141,10 @@ export default class Home extends React.Component {
                     }
 
                 {this.addLocationRender()} 
+                <Sidebar 
+                    logout={this.props.logout}
+                    currentUser={this.props.currentUser}
+                />   
                 
             </div>
         )

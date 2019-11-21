@@ -5,9 +5,8 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import Signup from "./components/user-pages/Signup";
 import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
-import LocationDetails from './components/LocationDetails'
-import Sidebar from './components/Sidebar'
 import LandingPage from './components/LandingPage'
+import LocationDetails from './components/LocationDetails'
 
 
 class App extends React.Component{
@@ -17,8 +16,8 @@ class App extends React.Component{
       currentUser: null,
       allLocations:[],
       visibleLocations:[],
-      latitude:25.7617,
-      longitude:-80.1918,
+      latitude:35.7617,
+      longitude:-90.1918,
       locationsReady: false,
       coordinatesReady: false,
     }
@@ -76,31 +75,6 @@ class App extends React.Component{
   }
 
 
-
-
-//   getCurrentCoordinates = () =>{
-
-//     console.log('beginning of the function')
-
-
-//       navigator.geolocation.getCurrentPosition((position)=>{
-
-//         console.log('trying to get loction')
-
-//         if(position){
-
-//           console.log('got location', position)
-
-//           this.setState({
-//             latitude:position.coords.latitude,
-//             longitude:position.coords.longitude,  
-//           })
-
-//         }
-//   })
-// }
-
-
   editLocationToggle=()=>{
     this.setState({
         editLocation:!this.state.editLocation,
@@ -117,6 +91,7 @@ class App extends React.Component{
             <Route exact path="/" render={ ()=>< LandingPage
             /> }   /> 
             <Route exact path="/home" render={ ()=>< Home
+                logout={this.logout}
                 currentUser={this.state.currentUser}
                 coordinatesReady={this.state.coordinatesReady}
                 visibleLocations={this.state.visibleLocations}
@@ -146,17 +121,18 @@ class App extends React.Component{
                   {...props} 
                   getAllLocations={this.getAllLocations}
                   editLocationToggle={this.editLocationToggle}
-                  currentUser = { this.state.currentUser }   
+                  currentUser = { this.state.currentUser }  
+                  logout={this.logout} 
               
                 /> 
             }/>
 
         </Switch>
-        <Sidebar 
+        {/* <Sidebar 
             logout={this.logout}
             currentUser={this.state.currentUser}
             >   
-        </Sidebar>
+        </Sidebar> */}
       </div>
     );
   }

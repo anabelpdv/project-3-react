@@ -2,16 +2,25 @@ export default
 [
     {
         "featureType": "all",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "all",
         "elementType": "labels.text.fill",
         "stylers": [
             {
-                "saturation": 36
+                "saturation": "0"
             },
             {
-                "color": "#b39964"
+                "color": "#848c92"
             },
             {
-                "lightness": 40
+                "lightness": "0"
             }
         ]
     },
@@ -23,10 +32,10 @@ export default
                 "visibility": "on"
             },
             {
-                "color": "#000000"
+                "color": "#313539"
             },
             {
-                "lightness": 16
+                "lightness": "0"
             }
         ]
     },
@@ -44,7 +53,7 @@ export default
         "elementType": "geometry.fill",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#313539"
             },
             {
                 "lightness": 20
@@ -56,7 +65,7 @@ export default
         "elementType": "geometry.stroke",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#313539"
             },
             {
                 "lightness": 17
@@ -67,11 +76,35 @@ export default
         ]
     },
     {
+        "featureType": "administrative.country",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#cfa565"
+            }
+        ]
+    },
+    {
         "featureType": "administrative.locality",
         "elementType": "labels.text.fill",
         "stylers": [
             {
-                "color": "#f19a9e"
+                "color": "#ffffff"
+            },
+            {
+                "lightness": "0"
+            },
+            {
+                "gamma": "1"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.neighborhood",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#cfa565"
             }
         ]
     },
@@ -80,10 +113,10 @@ export default
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#313539"
             },
             {
-                "lightness": 20
+                "lightness": "0"
             }
         ]
     },
@@ -92,10 +125,22 @@ export default
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#313539"
             },
             {
-                "lightness": 21
+                "lightness": "8"
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.business",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
             }
         ]
     },
@@ -104,10 +149,10 @@ export default
         "elementType": "geometry.fill",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#cfa565"
             },
             {
-                "lightness": 17
+                "lightness": "0"
             }
         ]
     },
@@ -116,13 +161,31 @@ export default
         "elementType": "geometry.stroke",
         "stylers": [
             {
-                "color": "#000000"
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#848c92"
             },
             {
-                "lightness": 29
+                "lightness": "25"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#313539"
             },
             {
-                "weight": 0.2
+                "lightness": "0"
             }
         ]
     },
@@ -131,10 +194,52 @@ export default
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#313539"
             },
             {
-                "lightness": 18
+                "lightness": "5"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#313539"
+            },
+            {
+                "lightness": "15"
+            },
+            {
+                "gamma": "1"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#848c92"
+            },
+            {
+                "lightness": "25"
+            },
+            {
+                "gamma": "1"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#313539"
+            },
+            {
+                "lightness": "0"
             }
         ]
     },
@@ -143,10 +248,25 @@ export default
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#181818"
+                "color": "#313539"
             },
             {
-                "lightness": 16
+                "lightness": "10"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#848c92"
+            },
+            {
+                "lightness": "0"
+            },
+            {
+                "gamma": "1"
             }
         ]
     },
@@ -155,10 +275,13 @@ export default
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "color": "#313539"
             },
             {
-                "lightness": 19
+                "lightness": "5"
+            },
+            {
+                "gamma": "1"
             }
         ]
     },
@@ -167,13 +290,14 @@ export default
         "elementType": "geometry",
         "stylers": [
             {
-                "lightness": 17
+                "color": "#313539"
             },
             {
-                "color": "#525252"
+                "lightness": "-10"
+            },
+            {
+                "gamma": "1"
             }
         ]
     }
 ]
-
-

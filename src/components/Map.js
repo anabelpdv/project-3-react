@@ -15,7 +15,7 @@ function Map(props) {
 
   return (
     <GoogleMap
-      defaultZoom={10}
+      defaultZoom={5}
       defaultCenter={{ lat: props.latitude, lng: props.longitude}}
       defaultOptions={{ styles: mapStyles, disableDoubleClickZoom: true }}
       onDblClick={(e)=>{
@@ -32,7 +32,11 @@ function Map(props) {
         onClick={()=>{
           setCurrentLocation(location);
         }}
-    /> 
+        icon={{
+          url: `/marker.png`,
+          scaledSize: new window.google.maps.Size(50, 50)
+        }}
+      />
     ))}
       {currentLocation && (
       <InfoWindow

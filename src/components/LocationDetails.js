@@ -2,6 +2,7 @@ import React from 'react'
 import EditLocation from './EditLocation'
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios'
+import Sidebar from './Sidebar'
 
 import AddComment from  './AddComment'
 
@@ -148,6 +149,10 @@ export default class LocationDetails extends React.Component {
                   
                 </div>
                 {this.editLocationRender()}
+                <Sidebar 
+                    logout={this.props.logout}
+                    currentUser={this.props.currentUser}
+                /> 
         </div>
         </div>
       )

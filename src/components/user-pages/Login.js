@@ -26,7 +26,7 @@ export default class Login extends React.Component {
               const { userDoc } = response.data;
               console.log("user login: ", userDoc)
               this.props.onUserChange(userDoc);
-              this.props.history.push(`/`)
+              this.props.history.push(`/home`)
             })
             .catch(err=>{
               console.log(err)
