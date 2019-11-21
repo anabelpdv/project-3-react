@@ -120,7 +120,8 @@ export default class Home extends React.Component {
 
 
     render(){
-        console.log('Home props', this.props)
+
+        console.log('Coordinates in home',this.props.coordinatesReady)
         return (
             <div>
                 {(this.props.locationsReady && this.props.coordinatesReady) &&

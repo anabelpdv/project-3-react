@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import axios from "axios";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import Signup from "./components/user-pages/Signup";
 import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
@@ -16,8 +16,8 @@ class App extends React.Component{
       currentUser: null,
       allLocations:[],
       visibleLocations:[],
-      latitude:25.4,
-      longitude:-80.555,
+      latitude:50,
+      longitude:80.555,
       locationsReady: false,
       coordinatesReady: false,
     }
@@ -56,6 +56,7 @@ class App extends React.Component{
         })
   }
 
+  
   logout=()=>{
     axios.post(`${process.env.REACT_APP_API_URL}/logout`,{}, { withCredentials: true })
           .then(response=>{
@@ -73,15 +74,35 @@ class App extends React.Component{
     this.setState({ currentUser: user })
   }
 
+
+
+
   getCurrentCoordinates = () =>{
+
+    console.log('beginning of the function')
+
+
       navigator.geolocation.getCurrentPosition((position)=>{
-        this.setState({
-          latitude:position.coords.latitude,
-          longitude:position.coords.longitude,
-          coordinatesReady:true,
-        })
-    
-  })}
+
+        console.log('trying to get loction')
+
+        if(position){
+
+          console.log('got location', position)
+
+          this.setState({
+            latitude:position.coords.latitude,
+            longitude:position.coords.longitude,  
+            coordinatesReady:true,
+          })
+
+        }
+
+      
+       
+  })
+}
+
 
   editLocationToggle=()=>{
     this.setState({

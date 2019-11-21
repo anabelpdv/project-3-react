@@ -3,6 +3,8 @@ import EditLocation from './EditLocation'
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios'
 
+import AddComment from  './AddComment'
+
 export default class LocationDetails extends React.Component {
   constructor(props){
     super(props);
@@ -12,8 +14,10 @@ export default class LocationDetails extends React.Component {
       lat:'',
       lng:'',
       imageUrl:[],
+      comments:[],
       editLocation:false,
       locationReady:false,
+      addComment:false,
     }
   }
 
@@ -24,15 +28,15 @@ export default class LocationDetails extends React.Component {
 
   getLocation=()=>{
     const location = this.props.location.state.location
-
-    console.log('This is the location Im getting in this component', location)
       this.setState({
+              locationId:location._id,
               title:location.title,
               description:location.description,
               lat:location.lat,
               lng:location.lng,
               id:location._id,
               imageUrl: location.imageUrl,
+              comments:location.comments,
               locationReady:true,
 
       })
@@ -41,6 +45,12 @@ export default class LocationDetails extends React.Component {
   editLocationToggle=()=>{
     this.setState({
         editLocation:!this.state.editLocation,
+    })
+  }
+
+  addCommentToggle=()=>{
+      this.setState({
+        addComment:!this.state.addComment,
     })
   }
 
@@ -92,21 +102,6 @@ export default class LocationDetails extends React.Component {
       }     
   }
 
-  // renderCarousel=()=>{
-  //   return(
-  //     <Carousel>
-  //         {this.state.imageUrl.map((photo,i)=>{
-  //             return(
-                
-  //               <Carousel.Item>
-  //               <Carousel.Item>
-                
-  //             )
-  //         })}
-
-  //     </Carousel>
-  //   )
-  // }
 
   renderDetails=()=>{
     if(this.state.locationReady){
@@ -116,16 +111,16 @@ export default class LocationDetails extends React.Component {
               <div className="details-box">
                   <button className="btn" onClick={()=>this.props.history.push('/')}>Close</button>
                   <button onClick={this.editLocationToggle} className="btn">Edit</button>
-                  <button onClick={()=>console.log('I do nothing')} className="btn">Comment</button>
+                  <button onClick={this.addCommentToggle} className="btn">Comment</button>
                   <Carousel>
                       {this.state.imageUrl.map((photo,i)=>(
-                              <Carousel.Item>
-                              <img
-                                className="d-block w-100"
-                                src={photo}
-                                alt="First slide"
-                              />
-                            </Carousel.Item>
+                              <Carousel.Item key={i}>
+                                <img 
+                                    className="carousel-image"
+                                    src={photo}
+                                    alt="First slide"
+                                  />
+                              </Carousel.Item>
                         ))}
                   </Carousel>
                   <h1>{this.state.title}</h1>
@@ -133,6 +128,24 @@ export default class LocationDetails extends React.Component {
                 </div>
                 <div className="comments-box">
                   <h1>Comments here</h1>
+
+                {this.state.addComment   && 
+                                                <AddComment
+                                                  addCommentToggle={this.addCommentToggle}
+                                                  locationId={this.state.locationId}
+                                                  currentUser={this.props.currentUser}
+                                                />
+                }
+                    
+                    {this.state.comments.map((comment,i)=>(
+                            
+                             // <p>{cooment.author}</p>             
+                              <p>{comment.content}</p>
+                        
+                        ))}                  
+                  
+                  
+                  
                 </div>
                 {this.editLocationRender()}
         </div>
@@ -143,9 +156,10 @@ export default class LocationDetails extends React.Component {
 
 
   render() {
-
+    console.log(this.state.comments)
     return (
         <div>
+          
           {this.renderDetails()}
         </div>
     )

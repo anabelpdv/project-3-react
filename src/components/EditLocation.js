@@ -13,7 +13,10 @@ export default class EditLocation extends React.Component {
 
       <div className="edit-location-form">
       <h1>Edit Location</h1>
-        <form onSubmit={(e)=>this.props.editFormHandler(e)}>
+        <form onSubmit={(e)=>{
+          this.props.editFormHandler(e)
+          this.props.editLocationToggle()
+        }}>
           <div>
               <p>Title</p>
               <input className="input-element" onChange={this.props.inputHandler} type="text" name="title" value={this.props.title}/>
