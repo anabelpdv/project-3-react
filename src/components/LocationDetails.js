@@ -109,7 +109,7 @@ export default class LocationDetails extends React.Component {
         <div className="location-wrapper">
           <div className="location-details-container">
               <div className="details-box">
-                  <button className="btn" onClick={()=>this.props.history.push('/')}>Close</button>
+                  <button className="btn" onClick={()=>this.props.history.push('/home')}>Close</button>
                   <button onClick={this.editLocationToggle} className="btn">Edit</button>
                   <button onClick={this.addCommentToggle} className="btn">Comment</button>
                   <Carousel>

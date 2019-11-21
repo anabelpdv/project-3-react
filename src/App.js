@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Login from "./components/user-pages/Login";
 import LocationDetails from './components/LocationDetails'
 import Sidebar from './components/Sidebar'
+import LandingPage from './components/LandingPage'
 
 
 class App extends React.Component{
@@ -16,8 +17,8 @@ class App extends React.Component{
       currentUser: null,
       allLocations:[],
       visibleLocations:[],
-      latitude:50,
-      longitude:80.555,
+      latitude:25.7617,
+      longitude:-80.1918,
       locationsReady: false,
       coordinatesReady: false,
     }
@@ -26,7 +27,7 @@ class App extends React.Component{
   componentDidMount(){
     this.getAllLocations()
     this.requestUserToDB(); 
-    this.getCurrentCoordinates();
+    //this.getCurrentCoordinates();
   }
 
   getAllLocations=()=>{
@@ -56,7 +57,7 @@ class App extends React.Component{
         })
   }
 
-  
+
   logout=()=>{
     axios.post(`${process.env.REACT_APP_API_URL}/logout`,{}, { withCredentials: true })
           .then(response=>{
@@ -77,31 +78,27 @@ class App extends React.Component{
 
 
 
-  getCurrentCoordinates = () =>{
+//   getCurrentCoordinates = () =>{
 
-    console.log('beginning of the function')
+//     console.log('beginning of the function')
 
 
-      navigator.geolocation.getCurrentPosition((position)=>{
+//       navigator.geolocation.getCurrentPosition((position)=>{
 
-        console.log('trying to get loction')
+//         console.log('trying to get loction')
 
-        if(position){
+//         if(position){
 
-          console.log('got location', position)
+//           console.log('got location', position)
 
-          this.setState({
-            latitude:position.coords.latitude,
-            longitude:position.coords.longitude,  
-            coordinatesReady:true,
-          })
+//           this.setState({
+//             latitude:position.coords.latitude,
+//             longitude:position.coords.longitude,  
+//           })
 
-        }
-
-      
-       
-  })
-}
+//         }
+//   })
+// }
 
 
   editLocationToggle=()=>{
@@ -116,7 +113,10 @@ class App extends React.Component{
       <div>
   
         <Switch>
-            <Route exact path="/" render={ ()=>< Home
+
+            <Route exact path="/" render={ ()=>< LandingPage
+            /> }   /> 
+            <Route exact path="/home" render={ ()=>< Home
                 currentUser={this.state.currentUser}
                 coordinatesReady={this.state.coordinatesReady}
                 visibleLocations={this.state.visibleLocations}

@@ -29,7 +29,7 @@ export default class Sidebar extends React.Component {
 
     {this.props.currentUser ? (
                 <div>
-                <NavLink className="" to="/">U-Xer</NavLink>
+                <NavLink className="" to="/home">U-Xer</NavLink>
                 <button className=""  onClick={this.props.logout}>Logout</button>  
               </div>
               ) : (

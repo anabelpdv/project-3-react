@@ -120,11 +120,9 @@ export default class Home extends React.Component {
 
 
     render(){
-
-        console.log('Coordinates in home',this.props.coordinatesReady)
         return (
             <div>
-                {(this.props.locationsReady && this.props.coordinatesReady) &&
+                {this.props.locationsReady  &&
                             <div className="newMap">
                                 <MapWrapped 
                                 detailsToggle={this.detailsToggle}
