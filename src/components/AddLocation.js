@@ -31,38 +31,13 @@ export default class AddLocation extends React.Component {
               <input className="input-element" onChange={this.props.inputHandler} type="number" name="lng" value={this.props.lng}/>
           </div>
           <div>
-          <div className="images-container">
-            <div className="image-box">
-              <button className='image-button'>Image 1</button>
-              <img src="" alt=""/>
-              <input name="image1" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
-            </div>
-            <div className="image-box">
-              <button className='image-button'>Image 2</button>
-              <img src="" alt=""/>
-              <input name="image2" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
-            </div>
-            <div className="image-box">
-              <button className='image-button'>Image 3</button>
-              <img src="" alt=""/>
-              <input name="image3" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
-            </div>
-            <div className="image-box">
-              <button className='image-button'>Image 4</button>
-              <img src="" alt=""/>
-              <input name="image4" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
-            </div>
-            <div className="image-box">
-              <button className='image-button'>Image 5</button>
-              <img src="" alt=""/>
-              <input name="image5" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
-            </div>
-            <div className="image-box">
-              <button className='image-button'>Image 6</button>
-              <img src="" alt=""/>
-              <input name="image6" className="image-input"type="file" onChange={this.props.fileUploadHandler}/>
-            </div>
+        
+          <div className="image-input-box"> 
+              <input name="image" className="image-input"type="file" onChange={this.props.fileUploadHandler} multiple/>
+              <button className="image-input-btn"><i class="far fa-image"></i></button>
+
           </div>
+          
           </div>
           <button className="btn">Save</button>
           <button className="btn" onClick={this.props.addLocationToggle}>Cancel</button>

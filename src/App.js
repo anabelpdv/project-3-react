@@ -123,16 +123,10 @@ class App extends React.Component{
                   editLocationToggle={this.editLocationToggle}
                   currentUser = { this.state.currentUser }  
                   logout={this.logout} 
-              
                 /> 
             }/>
 
         </Switch>
-        {/* <Sidebar 
-            logout={this.logout}
-            currentUser={this.state.currentUser}
-            >   
-        </Sidebar> */}
       </div>
     );
   }

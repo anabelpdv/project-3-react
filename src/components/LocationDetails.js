@@ -37,10 +37,24 @@ export default class LocationDetails extends React.Component {
               lng:location.lng,
               id:location._id,
               imageUrl: location.imageUrl,
-              comments:location.comments,
               locationReady:true,
 
+      },()=>{
+        this.getComments();
       })
+  }
+
+  getComments=()=>{
+    axios.get(`${process.env.REACT_APP_API_URL}/comments/${this.state.id}`)
+          .then(response=>{
+            console.log('this is the response',response.data)
+              this.setState({
+                comments:response.data
+              })
+          })
+          .catch(err=>{
+            console.log(err)
+          })
   }
 
   editLocationToggle=()=>{
@@ -110,8 +124,6 @@ export default class LocationDetails extends React.Component {
         <div className="location-wrapper">
           <div className="location-details-container">
               <div className="details-box">
-                  <button className="btn" onClick={()=>this.props.history.push('/home')}>Close</button>
-                  <button onClick={this.editLocationToggle} className="btn">Edit</button>
                   <Carousel>
                       {this.state.imageUrl.map((photo,i)=>(
                               <Carousel.Item key={i}>
@@ -125,12 +137,15 @@ export default class LocationDetails extends React.Component {
                   </Carousel>
                   <h1>{this.state.title}</h1>
                   <p>{this.state.description}</p>
+                  <button className="btn" onClick={()=>this.props.history.push('/home')}>Close</button>
+                  <button onClick={this.editLocationToggle} className="btn">Edit</button>
                 </div>
                 <div className="comments-box">
-                  <button onClick={this.addCommentToggle} className="icon-btn"><i class="far fa-comments"></i></button>         
+                  <button onClick={this.addCommentToggle} className="icon-btn"><i className="far fa-comments"></i></button>         
                   {this.state.addComment   && 
                                                   <AddComment
                                                     addCommentToggle={this.addCommentToggle}
+                                                    getComments={this.getComments}
                                                     locationId={this.state.locationId}
                                                     currentUser={this.props.currentUser}
                                                   />
@@ -138,13 +153,14 @@ export default class LocationDetails extends React.Component {
                   
                   {this.state.comments.reverse().map((comment,i)=>(
                           <div key={i}> 
-                            <p>{comment.author}</p>             
+                            <p>{comment.author.fullName}</p>             
                             <div className="comment-bubble">
                               {comment.content}
                             </div>
                           </div>
-                      ))}                  
-                  </div>
+                      ))} 
+                    
+                  </div> 
                 {this.editLocationRender()}
         </div>
         <Sidebar 
@@ -158,7 +174,6 @@ export default class LocationDetails extends React.Component {
 
 
   render() {
-    console.log(this.state.comments)
     return (
         <div>
           {this.renderDetails()}

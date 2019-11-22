@@ -19,11 +19,11 @@ export default class Sidebar extends React.Component {
             <button className="icon-btn"onClick={this.props.addLocationToggle}>
             <i className="fas fa-map-marker-alt"></i>
             </button>
-            <p>Add Location</p>
+            <p>Marker</p>
         </div>
         <div className="sidebar-element">
             <button className="icon-btn">
-            <i class="fas fa-heart"></i>
+            <i className="fas fa-heart"></i>
             </button>
             <p>Favorites</p>
         </div>
@@ -35,13 +35,13 @@ export default class Sidebar extends React.Component {
         </div>
         <div className="sidebar-element">
           <button className="icon-btn">
-          <i class="fas fa-globe-americas"></i>
+          <i className="fas fa-globe-americas"></i>
           </button>
-          <p>List All</p>
+          <p>All</p>
         </div>
         <div className="sidebar-element">
           <button className="icon-btn"  onClick={this.props.logout}>
-          <i class="fas fa-sign-out-alt"></i>
+          <i className="fas fa-sign-out-alt"></i>
           </button> 
           <p>Logout </p>
         </div>

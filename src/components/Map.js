@@ -17,7 +17,13 @@ function Map(props) {
     <GoogleMap
       defaultZoom={5}
       defaultCenter={{ lat: props.latitude, lng: props.longitude}}
-      defaultOptions={{ styles: mapStyles, disableDoubleClickZoom: true }}
+      defaultOptions={{ 
+        styles: mapStyles, 
+        disableDoubleClickZoom: true,
+        mapTypeControl:false,
+        streetViewControl: false,
+        fullscreenControl: false,
+      }}
       onDblClick={(e)=>{
         props.addLocationToggle()
         props.inputCoordinatesHandle(e);
@@ -49,14 +55,15 @@ function Map(props) {
         >
         <div className="info-window">
           <h6>{currentLocation.title}</h6>
-          <img src={currentLocation.imageUrl[0]} alt=""/>
-          
           <Link to={{
             pathname:'/details',
             state:{
               location: currentLocation,
             }
-          }}> <button>Details</button></Link>
+          }}> 
+          
+          <img className="info-window-img" src={currentLocation.imageUrl[0]} alt=""/>
+          </Link>
           
         
         </div>
