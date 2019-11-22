@@ -109,8 +109,8 @@
   background-color: rgb(0,0,0,0);
   border-radius:30px;
   width:90px;
-  border: 1px solid #D2C2A2;
-  color:#D2C2A2;
+  border: 1px solid #D0A565;
+  color:#D0A565;
   font-size: 1em;
   display: inline-block;
   padding:5px;
@@ -272,17 +272,41 @@
 
 .sidebar-container{
   padding-top:30px;
-  color:#D2C2A2 ;
+  color:#D0A565;
   position:absolute;
-  background-color: rgb(0,0,0,0.8);
+  background-color: rgb(0,0,0,0.85);
   top:0;
   height:100vh;
   width:10vw;
   text-align: center;
 }
 
-.sidebar-element p{
-  font-size:1.5em;
+.brand-sidebar{
+  color:#D0A565;
+  font-size:2.7em;
+  font-weight:bold;
+}
+
+.sidebar-element{
+  margin: 10px,0, 0, 0;
+} 
+
+.sidebar-element > p{
+  font-size:0.8em;
+  margin:0;
+}
+
+.icon-btn{
+  background-color: rgb(0,0,0,0);
+  border:none;
+  width:90px;
+  color:#D0A565;
+  font-size: 2.5em;
+  padding:0;
+}
+
+.icon-btn :hover{
+  color: #44A3D3;
 }
 
 .user-info-container{

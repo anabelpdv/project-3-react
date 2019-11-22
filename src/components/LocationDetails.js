@@ -144,16 +144,13 @@ export default class LocationDetails extends React.Component {
                               <p>{comment.content}</p>
                         
                         ))}                  
-                  
-                  
-                  
-                </div>
+                  </div>
                 {this.editLocationRender()}
-                <Sidebar 
+        </div>
+        <Sidebar 
                     logout={this.props.logout}
                     currentUser={this.props.currentUser}
                 /> 
-        </div>
         </div>
       )
     }
