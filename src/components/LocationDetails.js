@@ -112,7 +112,6 @@ export default class LocationDetails extends React.Component {
               <div className="details-box">
                   <button className="btn" onClick={()=>this.props.history.push('/home')}>Close</button>
                   <button onClick={this.editLocationToggle} className="btn">Edit</button>
-                  <button onClick={this.addCommentToggle} className="btn">Comment</button>
                   <Carousel>
                       {this.state.imageUrl.map((photo,i)=>(
                               <Carousel.Item key={i}>
@@ -128,22 +127,23 @@ export default class LocationDetails extends React.Component {
                   <p>{this.state.description}</p>
                 </div>
                 <div className="comments-box">
-                  <h1>Comments here</h1>
-
-                {this.state.addComment   && 
-                                                <AddComment
-                                                  addCommentToggle={this.addCommentToggle}
-                                                  locationId={this.state.locationId}
-                                                  currentUser={this.props.currentUser}
-                                                />
-                }
-                    
-                    {this.state.comments.map((comment,i)=>(
-                            
-                             // <p>{cooment.author}</p>             
-                              <p>{comment.content}</p>
-                        
-                        ))}                  
+                  <button onClick={this.addCommentToggle} className="icon-btn"><i class="far fa-comments"></i></button>         
+                  {this.state.addComment   && 
+                                                  <AddComment
+                                                    addCommentToggle={this.addCommentToggle}
+                                                    locationId={this.state.locationId}
+                                                    currentUser={this.props.currentUser}
+                                                  />
+                  }
+                  
+                  {this.state.comments.reverse().map((comment,i)=>(
+                          <div key={i}> 
+                            <p>{comment.author}</p>             
+                            <div className="comment-bubble">
+                              {comment.content}
+                            </div>
+                          </div>
+                      ))}                  
                   </div>
                 {this.editLocationRender()}
         </div>
@@ -161,7 +161,6 @@ export default class LocationDetails extends React.Component {
     console.log(this.state.comments)
     return (
         <div>
-          
           {this.renderDetails()}
         </div>
     )

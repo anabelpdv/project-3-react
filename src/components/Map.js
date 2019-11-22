@@ -34,12 +34,12 @@ function Map(props) {
         }}
         icon={{
           url: `/marker.png`,
-          scaledSize: new window.google.maps.Size(50, 50)
+          scaledSize: new window.google.maps.Size(40, 40)
         }}
       />
     ))}
       {currentLocation && (
-      <InfoWindow
+      <InfoWindow 
         position = {{ 
           lat: currentLocation.lat,
           lng: currentLocation.lng }}
@@ -47,15 +47,16 @@ function Map(props) {
             setCurrentLocation(null);
         }}
         >
-        <div>
-          <h1>{currentLocation.title}</h1>
+        <div className="info-window">
+          <h6>{currentLocation.title}</h6>
+          <img src={currentLocation.imageUrl[0]} alt=""/>
           
           <Link to={{
             pathname:'/details',
             state:{
               location: currentLocation,
             }
-          }}> <button>  Details</button></Link>
+          }}> <button>Details</button></Link>
           
         
         </div>

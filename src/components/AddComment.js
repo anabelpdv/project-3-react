@@ -42,8 +42,8 @@ render() {
 		return (
 			<div>
 				<form onSubmit={this.commentFormHandler}>
-						<input type="text" onChange={this.inputHandler} name="content" value={this.state.content}/>
-						<button>submit</button>
+						<input type="text" className="comment-input"onChange={this.inputHandler} name="content" value={this.state.content}/>
+						<button style={{display:'none'}}>submit</button>
 				</form>
 			</div>
 		)

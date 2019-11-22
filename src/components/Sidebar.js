@@ -23,7 +23,7 @@ export default class Sidebar extends React.Component {
         </div>
         <div className="sidebar-element">
             <button className="icon-btn">
-              <i className="far fa-heart"></i>
+            <i class="fas fa-heart"></i>
             </button>
             <p>Favorites</p>
         </div>
