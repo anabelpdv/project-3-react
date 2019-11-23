@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
     constructor(props){
       super(props);
@@ -26,6 +26,7 @@ export default class Login extends React.Component {
               const { userDoc } = response.data;
               console.log("user login: ", userDoc)
               this.props.onUserChange(userDoc);
+              this.props.showLoginToggle();
               this.props.history.push(`/home`)
             })
             .catch(err=>{
@@ -37,30 +38,43 @@ export default class Login extends React.Component {
     render() {
       const { fullName, email, password } = this.state;
       if(this.props.currentUser){
-        return <Redirect to='/' />
+        return <Redirect to='/home' />
       }
 
       return (
-        <section className="login-page">
+        <div className="login-container">
           <h2>Log in</h2>
           <form onSubmit={this.handleSubmit}>
             <label>Email:</label>
-            <input  type='email'
-                    value={email}
-                    onChange={this.genericSync}
-                    name='email'
-                    placeholder='user@uxer.com'
-            />
+            <div>
+              <input
+              className="user-input"  
+              type='email'
+              value={email}
+              onChange={this.genericSync}
+              name='email'
+              placeholder='user@uxer.com'
+              />
+            </div>
             <label>Password:</label>
-            <input  type='password'
-                    value={password}
-                    onChange={this.genericSync}
-                    name='password'
-                    placeholder='**************'
-            />
-            <button>Login</button>
+            <div>
+              <input 
+              className="user-input" 
+              type='password'
+              value={password}
+              onChange={this.genericSync}
+              name='password'
+              placeholder='**************'
+              />
+            </div>
+            <button className="btn">Login</button>
+            <button onClick={this.props.showLoginToggle}className="btn">Cancel</button>
           </form>
-        </section>
+          
+        </div>
       )
     }
 }
+
+
+export default withRouter(Login)

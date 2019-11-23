@@ -2,9 +2,7 @@ import React from 'react';
 import './App.css';
 import axios from "axios";
 import { Switch, Route, withRouter } from "react-router-dom";
-import Signup from "./components/user-pages/Signup";
 import Home from "./components/Home";
-import Login from "./components/user-pages/Login";
 import LandingPage from './components/LandingPage'
 import LocationDetails from './components/LocationDetails'
 
@@ -20,13 +18,26 @@ class App extends React.Component{
       longitude:-90.1918,
       locationsReady: false,
       coordinatesReady: false,
+      showLogin:false,
+      showSignup:false,
     }
   }
 
   componentDidMount(){
     this.getAllLocations()
     this.requestUserToDB(); 
-    //this.getCurrentCoordinates();
+  }
+
+  showLoginToggle=()=>{
+    this.setState({
+      showLogin: !this.state.showLogin
+    })
+  }
+
+  showSignupToggle=()=>{
+    this.setState({
+      showSignup: !this.state.showSignup,
+    })
   }
 
   getAllLocations=()=>{
@@ -63,7 +74,7 @@ class App extends React.Component{
             this.setState({
               currentUser:response.userDoc,
             })
-            this.props.history.push("/login")
+            this.props.history.push("/")
           }) 
           .catch(err=>{
             console.log(err);
@@ -89,6 +100,12 @@ class App extends React.Component{
         <Switch>
 
             <Route exact path="/" render={ ()=>< LandingPage
+            currentUser = { this.state.currentUser } 
+            onUserChange = { userDoc => this.syncCurrentUSer(userDoc) } 
+            showLoginToggle = {this.showLoginToggle}
+            showSignupToggle = {this.showSignupToggle}
+            showLogin={this.state.showLogin}
+            showSignup={this.state.showSignup}
             /> }   /> 
             <Route exact path="/home" render={ ()=>< Home
                 logout={this.logout}
@@ -101,20 +118,12 @@ class App extends React.Component{
                 longitude={this.state.longitude}
             /> }   /> 
 
-            <Route exact path="/signup-page" render = { () => 
+            {/* <Route exact path="/signup-page" render = { () => 
                 <Signup 
                   currentUser = { this.state.currentUser }   
                   onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }   
                 /> 
-            }/>
-
-            <Route exact path="/login" render={ (props)=> 
-                <Login 
-                  {...props} 
-                  currentUser = { this.state.currentUser }   
-                  onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }  
-                /> 
-            } /> 
+            }/> */}
 
             <Route exact path="/details" render={ (props)=> 
                 <LocationDetails 

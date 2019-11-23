@@ -1,18 +1,34 @@
   import React, { Component } from 'react'
-  import { NavLink } from "react-router-dom";
+  import  Login from './user-pages/Login';
+  import  Signup from './user-pages/Signup';
 
-  export default class LandingPage extends Component {
+class LandingPage extends Component {
   render() {
     return (
     <div>
         <div className="pimg1">
             <div class="ptext">
                   <nav className="login-navbar">
-                    <NavLink className="signup-btn" to="/signup-page"> Signup </NavLink>
+                    <button onClick={this.props.showSignupToggle}className="signup-btn" to="/signup-page"> Signup </button>
                     <span class="brand-text">U-XER</span>
-                    <NavLink className="login-btn" to="/login"> Login </NavLink>
+                    <button onClick={this.props.showLoginToggle} className="login-btn" to="/login"> Login </button>
                   </nav>
                   <div className="overlay"/>
+
+                  {this.props.showLogin &&
+                  <Login 
+                  showLoginToggle={this.props.showLoginToggle}
+                  currentUser = { this.props.currentUser }   
+                  onUserChange = { this.props.onUserChange }  
+                /> 
+              }
+              {this.props.showSignup &&
+                  <Signup 
+                  showSignupToggle={this.props.showSignupToggle}
+                  currentUser = { this.props.currentUser }  
+                  onUserChange = { this.props.onUserChange }    
+                  /> 
+              } 
             </div>
         </div>
         <section className="section section-light">
@@ -28,7 +44,7 @@
               <i className="fas fa-camera"></i>
             </div>
             <h4>Mark</h4>
-            <p>Share your locations so that anyone can see GPS coords and upload images of places so that everyone knows what to expect.</p>
+            <p>Share your locations and upload images so that anyone can see GPS coords and know what to expect.</p>
             </div>
           <div className="section-box">
             <div className="icon">
@@ -46,7 +62,12 @@
       <section className="section section-dark">
         
       </section>
+
+
+
     </div>
     )
   }
   }
+
+  export default (LandingPage)

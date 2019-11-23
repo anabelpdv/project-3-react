@@ -63,21 +63,44 @@
 
 .brand-text{
   color:rgb(196,98,16);
+  text-shadow:#aaa 2px -0.9px 1px; 
   font-size:3.5em;
   font-weight:700;
-  text-shadow:#aaa 2px -0.9px 1px; 
+}
 
+.login-container{
+  color:#D0A565;
+  text-align: center;
+  position:absolute;
+  top:38%;
+  width:500px;
+  left:33%;
+  background-color: rgb(0,0,0,.9);
+  padding:10px 0;
+}
+
+.user-input{
+  border:none;
+  color:#D0A565;
+  height:50px;
+  min-width:100px;
+  width: 28vw;
+  background-color:rgb(169,169,169, 0.1);
+  padding:5px;
+  
 }
 
 .login-btn, .signup-btn{
   text-decoration:none;
-  margin: 0 20px;
-  color:#B2905D;
+  margin: 0 40px;
   color:rgb(196,98,16);
   font-size: 1.5em;
   font-weight:700;
   text-shadow:#aaa 1px -0.5px 0.3px; 
+  background-color:rgb(0,0,0,0);
+  border:none;
 }
+
 
 .section-light{
   padding:5px 0;
@@ -353,13 +376,6 @@
   margin-bottom:5px;
 }
 
-.login-page{
-  padding:200px;
-}
-
-.signup-page{
-  padding-top:80px;
-}
 
 .btn-logout {
   cursor:pointer;
@@ -369,7 +385,7 @@
   padding-top:30px;
   color:#D0A565;
   position:absolute;
-  background-color: rgb(0,0,0,0.9);
+  background-color: rgb(0,0,0,0.87);
   top:0;
   height:100vh;
   width:100px;
@@ -378,7 +394,9 @@
 }
 
 .brand-sidebar{
-  color:#D0A565;
+  text-shadow:#aaa 2px -0.9px 1px; 
+  color:rgb(196,98,16);
+  color:#44A3D3;
   font-size:1.8em;
   font-weight:bold;
   letter-spacing: 0px;

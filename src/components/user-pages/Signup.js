@@ -27,6 +27,8 @@ export default class Signup extends React.Component {
     axios.post(`${process.env.REACT_APP_API_URL}/signup`, this.state, {withCredentials: true})
           .then(response =>{
             const { userDoc } = response.data;
+            this.props.showSignupToggle();
+            this.props.history.push('/home')
             this.props.onUserChange(userDoc);
           })
           .catch(err=>{
@@ -40,37 +42,48 @@ export default class Signup extends React.Component {
 
     console.log("is user in signup: ", this.props.currentUser)
     if(this.props.currentUser){
-      return <Redirect to='/' />
+      return <Redirect to='/home' />
     }
     return (
-        <section className="signup-page">
+        <div className="login-container">
           <h2>Sign up</h2>
             <form onSubmit={this.handleSubmit}>
             <label>Full name:</label>
+              <div>
               <input type="text"
+                      className="user-input"
                       value={fullName}
                       onChange={this.genericSync}
                       name="fullName"
-                      palceholder="Anabel"
+                      placeholder="First Last "
               />
+              </div>
               <label>Email:</label>
-              <input type="email"
-                      value={email}
-                      onChange={this.genericSync}
-                      name="email"
-                      placeholder='user@uxer.com'
-              />
+              <div>
+                <input type="email"
+                        className="user-input"
+                        value={email}
+                        onChange={this.genericSync}
+                        name="email"
+                        placeholder='user@uxer.com'
+                />
+              </div>
               <label>Password:</label>
-              <input type="password"
-                      value={password}
-                      onChange={this.genericSync}
-                      name="password"
-                      placeholder='*************'
-              />
-              <button>Sign up</button>
+              <div>
+                <input type="password"
+                        className="user-input"
+                        value={password}
+                        onChange={this.genericSync}
+                        name="password"
+                        placeholder='*************'
+                />
+              </div>
+              
+              <button className="btn">Signup</button>
+              <button onClick={this.props.showSignupToggle}className="btn">Cancel</button>
             </form>
             {this.state.message && <div>{this.state.message}</div>} 
-        </section>
+        </div>
     )
   }
 }
