@@ -9,9 +9,9 @@ class LandingPage extends Component {
         <div className="pimg1">
             <div class="ptext">
                   <nav className="login-navbar">
-                    <button onClick={this.props.showSignupToggle}className="signup-btn" to="/signup-page"> Signup </button>
+                    <button onClick={this.props.showSignupToggle}className="signup-btn" to="/signup-page"> Sign Up </button>
                     <span class="brand-text">U-XER</span>
-                    <button onClick={this.props.showLoginToggle} className="login-btn" to="/login"> Login </button>
+                    <button onClick={this.props.showLoginToggle} className="login-btn" to="/login"> Log In </button>
                   </nav>
                   <div className="overlay"/>
 

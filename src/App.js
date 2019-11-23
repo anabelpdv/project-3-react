@@ -117,14 +117,6 @@ class App extends React.Component{
                 latitude={this.state.latitude}
                 longitude={this.state.longitude}
             /> }   /> 
-
-            {/* <Route exact path="/signup-page" render = { () => 
-                <Signup 
-                  currentUser = { this.state.currentUser }   
-                  onUserChange = { userDoc => this.syncCurrentUSer(userDoc) }   
-                /> 
-            }/> */}
-
             <Route exact path="/details" render={ (props)=> 
                 <LocationDetails 
                   {...props} 

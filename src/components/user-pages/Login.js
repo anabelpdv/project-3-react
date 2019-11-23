@@ -50,7 +50,7 @@ class Login extends React.Component {
               <input
               className="user-input"  
               type='email'
-              value={email}
+              value={email}np
               onChange={this.genericSync}
               name='email'
               placeholder='user@uxer.com'
