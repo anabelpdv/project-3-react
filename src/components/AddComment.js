@@ -30,9 +30,10 @@ commentFormHandler=(e)=>{
 
 	axios.post(`${process.env.REACT_APP_API_URL}/comments`,newComment)
 					.then(response=>{	
-						console.log('this is the toggle for the comment that is not working')
 						this.props.getComments();
-						this.props.addCommentToggle()
+						this.setState({
+							content:'',
+						})
 					})
 					.catch(err=>{
 							console.log(err)
@@ -43,7 +44,7 @@ render() {
 		return (
 			<div>
 				<form onSubmit={this.commentFormHandler}>
-						<input type="text" className="comment-input"onChange={this.inputHandler} name="content" value={this.state.content}/>
+						<input type="text" className="comment-input"onChange={this.inputHandler} placeHolder="Write a comment..." name="content" value={this.state.content}/>
 						<button style={{display:'none'}}>submit</button>
 				</form>
 			</div>

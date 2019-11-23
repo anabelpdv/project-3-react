@@ -18,7 +18,6 @@ export default class LocationDetails extends React.Component {
       comments:[],
       editLocation:false,
       locationReady:false,
-      addComment:false,
     }
   }
 
@@ -49,7 +48,7 @@ export default class LocationDetails extends React.Component {
           .then(response=>{
             console.log('this is the response',response.data)
               this.setState({
-                comments:response.data
+                comments:response.data.reverse(),
               })
           })
           .catch(err=>{
@@ -62,13 +61,6 @@ export default class LocationDetails extends React.Component {
         editLocation:!this.state.editLocation,
     })
   }
-
-  addCommentToggle=()=>{
-      this.setState({
-        addComment:!this.state.addComment,
-    })
-  }
-
 
   inputHandler=(e)=>{
     const name = e.target.name;
@@ -103,15 +95,14 @@ export default class LocationDetails extends React.Component {
           return(
               <div>
                   <EditLocation
-                      inputHandler={this.inputHandler} 
-                      editFormHandler={this.editFormHandler} 
-                      title={this.state.title} 
-                      description={this.state.description}
-                      lat={this.state.lat} 
-                      lng={this.state.lng}
-                      editLocationToggle={this.editLocationToggle}
-                      >
-                  </EditLocation>
+                  inputHandler={this.inputHandler} 
+                  editFormHandler={this.editFormHandler} 
+                  title={this.state.title} 
+                  description={this.state.description}
+                  lat={this.state.lat} 
+                  lng={this.state.lng}
+                  editLocationToggle={this.editLocationToggle}
+                  />
               </div>
           )
       }     
@@ -124,49 +115,48 @@ export default class LocationDetails extends React.Component {
         <div className="location-wrapper">
           <div className="location-details-container">
               <div className="details-box">
-                  <Carousel>
+                  <Carousel className="carousel">
                       {this.state.imageUrl.map((photo,i)=>(
                               <Carousel.Item key={i}>
                                 <img 
-                                    className="carousel-image"
-                                    src={photo}
-                                    alt="First slide"
-                                  />
+                                className="carousel-image"
+                                src={photo}
+                                alt="First slide"
+                                />
                               </Carousel.Item>
                         ))}
                   </Carousel>
-                  <h1>{this.state.title}</h1>
-                  <p>{this.state.description}</p>
-                  <button className="btn" onClick={()=>this.props.history.push('/home')}>Close</button>
-                  <button onClick={this.editLocationToggle} className="btn">Edit</button>
+                    <div className="description-box">
+                      <h1>{this.state.title}</h1>
+                      <p className>{this.state.description}</p>
+                    </div>
+                    <button className="details-btn" onClick={()=>this.props.history.push('/home')}>Close</button>
+                    <button onClick={this.editLocationToggle} className="details-btn">Edit</button>
                 </div>
                 <div className="comments-box">
-                  <button onClick={this.addCommentToggle} className="icon-btn"><i className="far fa-comments"></i></button>         
-                  {this.state.addComment   && 
-                                                  <AddComment
-                                                    addCommentToggle={this.addCommentToggle}
-                                                    getComments={this.getComments}
-                                                    locationId={this.state.locationId}
-                                                    currentUser={this.props.currentUser}
-                                                  />
-                  }
-                  
-                  {this.state.comments.reverse().map((comment,i)=>(
-                          <div key={i}> 
-                            <p>{comment.author.fullName}</p>             
-                            <div className="comment-bubble">
-                              {comment.content}
-                            </div>
-                          </div>
-                      ))} 
-                    
+                        <button className="icon-btn comment"><i className="far fa-comments"></i></button> 
+                        <AddComment
+                        getComments={this.getComments}
+                        locationId={this.state.locationId}
+                        currentUser={this.props.currentUser}
+                        />
+                      
+                        <div className="comments-container">        
+                            {this.state.comments.map((comment,i)=>(
+                                    <div key={i}> 
+                                      <div className="comment-bubble">
+                                        <p className="comment-content"><span>{comment.author.fullName}</span> {comment.content}</p>  
+                                      </div>
+                                    </div>
+                                ))} 
+                        </div>
                   </div> 
                 {this.editLocationRender()}
-        </div>
-        <Sidebar 
-                    logout={this.props.logout}
-                    currentUser={this.props.currentUser}
-                /> 
+          </div>
+          <Sidebar 
+          logout={this.props.logout}
+          currentUser={this.props.currentUser}
+          /> 
         </div>
       )
     }

@@ -13,6 +13,7 @@ export default class AddLocation extends React.Component {
 
     return (
       <div className="add-location-form">
+        <h3>Add Location</h3>
         <form onSubmit={(e) =>this.props.addFormHandler(e)}>
           <div>
               <p>Title</p>
