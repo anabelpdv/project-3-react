@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect , withRouter} from 'react-router-dom';
 
 
 
-export default class Signup extends React.Component {
+class Signup extends React.Component {
 
   constructor(props){
     super(props);
@@ -87,3 +87,6 @@ export default class Signup extends React.Component {
     )
   }
 }
+
+
+export default withRouter(Signup)
