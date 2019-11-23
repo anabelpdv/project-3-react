@@ -85,7 +85,7 @@
   height:50px;
   min-width:100px;
   width: 28vw;
-  background-color:rgb(169,169,169, 0.1);
+  background-color:rgb(169,169,169, 0.1) !important;
   padding:5px;
   
 }
