@@ -63,7 +63,7 @@
 
 .brand-text{
   color:rgb(196,98,16);
-  text-shadow:black 2px -0.9px 1px; 
+  text-shadow:#aaa 2px -0.9px 1px; 
   font-size:3.5em;
   font-weight:700;
 }
