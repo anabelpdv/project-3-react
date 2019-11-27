@@ -5,6 +5,7 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import Home from "./components/Home";
 import LandingPage from './components/LandingPage'
 import LocationDetails from './components/LocationDetails'
+import ProtectedRoute from './components/protected-route';
 
 
 class App extends React.Component{
@@ -107,7 +108,7 @@ class App extends React.Component{
             showLogin={this.state.showLogin}
             showSignup={this.state.showSignup}
             /> }   /> 
-            <Route exact path="/home" render={ ()=>< Home
+            <ProtectedRoute exact path="/home" render={ ()=>< Home
                 logout={this.logout}
                 currentUser={this.state.currentUser}
                 coordinatesReady={this.state.coordinatesReady}
@@ -117,7 +118,7 @@ class App extends React.Component{
                 latitude={this.state.latitude}
                 longitude={this.state.longitude}
             /> }   /> 
-            <Route exact path="/details" render={ (props)=> 
+            <ProtectedRoute exact path="/details" render={ (props)=> 
                 <LocationDetails 
                   {...props} 
                   getAllLocations={this.getAllLocations}
