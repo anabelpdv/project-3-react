@@ -102,7 +102,7 @@ class App extends React.Component{
 
             <Route exact path="/" render={ ()=>< LandingPage
             currentUser = { this.state.currentUser } 
-            onUserChange = { userDoc => this.syncCurrentUSer(userDoc) } 
+            // onUserChange = { userDoc => this.syncCurrentUSer(userDoc) } 
             showLoginToggle = {this.showLoginToggle}
             showSignupToggle = {this.showSignupToggle}
             showLogin={this.state.showLogin}
