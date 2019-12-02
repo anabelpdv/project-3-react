@@ -102,23 +102,28 @@ class App extends React.Component{
 
             <Route exact path="/" render={ ()=>< LandingPage
             currentUser = { this.state.currentUser } 
-            // onUserChange = { userDoc => this.syncCurrentUSer(userDoc) } 
+            onUserChange = { userDoc => this.syncCurrentUSer(userDoc) } 
             showLoginToggle = {this.showLoginToggle}
             showSignupToggle = {this.showSignupToggle}
             showLogin={this.state.showLogin}
             showSignup={this.state.showSignup}
             /> }   /> 
-            <ProtectedRoute exact path="/home" render={ ()=>< Home
-                logout={this.logout}
-                currentUser={this.state.currentUser}
-                coordinatesReady={this.state.coordinatesReady}
-                visibleLocations={this.state.visibleLocations}
-                locationsReady={this.state.locationsReady}
-                getAllLocations={this.getAllLocations}
-                latitude={this.state.latitude}
-                longitude={this.state.longitude}
-            /> }   /> 
-            <ProtectedRoute exact path="/details" render={ (props)=> 
+            <ProtectedRoute exact path="/home" currentUser={this.state.currentUser}
+            component={()=>
+            <Home
+            logout={this.logout}
+            currentUser={this.state.currentUser}
+            coordinatesReady={this.state.coordinatesReady}
+            visibleLocations={this.state.visibleLocations}
+            locationsReady={this.state.locationsReady}
+            getAllLocations={this.getAllLocations}
+            latitude={this.state.latitude}
+            longitude={this.state.longitude}
+            /> }
+            
+            />
+            <ProtectedRoute exact path="/details" currentUser={this.state.currentUser}
+            component={ (props)=> 
                 <LocationDetails 
                   {...props} 
                   getAllLocations={this.getAllLocations}
